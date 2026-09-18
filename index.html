@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090b10" />
+    <title>墨刃 · 动态漫 Runtime</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark">墨</div>
+          <div>
+            <strong>墨刃 Runtime</strong>
+            <span>SHOT DSL / VERTICAL SLICE 01</span>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button id="resetButton" class="button ghost">回到开头</button>
+          <button id="exportButton" class="button export">导出 MP4</button>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <div class="stage-column">
+          <div class="stage-frame">
+            <div id="stageMount" class="stage-mount"></div>
+            <div class="stage-chrome">
+              <span id="shotLabel">S01 · 建立空间</span>
+              <span id="timecode">00:00.00 / 00:16.00</span>
+            </div>
+          </div>
+
+          <div class="transport">
+            <button id="playButton" class="play-button" aria-label="播放">▶</button>
+            <input id="scrubber" type="range" min="0" max="16" step="0.01" value="0" />
+            <span id="transportState">READY</span>
+          </div>
+        </div>
+
+        <aside class="inspector">
+          <div class="panel-heading">
+            <span>镜头参数</span>
+            <span id="shotIndex">01 / 08</span>
+          </div>
+          <div class="shot-meta">
+            <span class="eyebrow">CURRENT SHOT</span>
+            <h1 id="shotTitle">建立空间</h1>
+            <p id="shotIntent">用远景建立双方距离与暮色压迫感。</p>
+          </div>
+          <label class="field">
+            <span>镜头强度 <b id="intensityValue">72</b></span>
+            <input id="intensityInput" type="range" min="25" max="100" value="72" />
+          </label>
+          <label class="field">
+            <span>镜头时长 <b id="durationValue">2.2s</b></span>
+            <input id="durationInput" type="range" min="0.8" max="4" step="0.1" value="2.2" />
+          </label>
+          <div class="event-list" id="eventList"></div>
+          <div class="runtime-note">
+            <span class="status-dot"></span>
+            修改参数只重算当前 Shot
+          </div>
+        </aside>
+      </section>
+
+      <section class="timeline-panel">
+        <div class="timeline-ruler" id="timelineRuler"></div>
+        <div class="track-row">
+          <div class="track-label">CAM</div>
+          <div class="track" id="cameraTrack"></div>
+        </div>
+        <div class="track-row">
+          <div class="track-label">ACT</div>
+          <div class="track" id="actorTrack"></div>
+        </div>
+        <div class="track-row">
+          <div class="track-label">VFX</div>
+          <div class="track" id="vfxTrack"></div>
+        </div>
+        <div class="playhead" id="playhead"></div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
