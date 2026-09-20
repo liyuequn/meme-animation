@@ -54,6 +54,12 @@ python3 scripts/search_motion_library.py "持剑攻击"
 
 该命令把 UAL 动作通过外置骨骼映射重定向到另一套角色骨架，输出可继续编辑的 `.blend`、检查报告和五张采样帧。更换正式角色时只需新增对应 rig map，不改 Director 的动作语义。
 
+### Blender MCP 建模实验
+
+本机已接入 Blender Lab 官方实验版 MCP。`blender/build_wuxia_character_prototype.py` 通过 MCP 在当前 Blender 会话中生成并渲染一个 49 对象的古风角色造型原型，用于验证 Codex → MCP → Blender 的闭环；它仍是程序化建模实验，不作为正式人物资产。
+
+![Blender MCP 古风角色原型](docs/wuxia-character-mcp-prototype.png)
+
 [查看 10 秒验证视频](docs/blender-motion-validation.mp4)
 
 ![Blender 骨骼动作验证分镜](docs/blender-motion-validation-contact-sheet.png)
