@@ -1,375 +1,285 @@
-import {
-  Application,
-  Assets,
-  BlurFilter,
-  Container,
-  Graphics,
-  Sprite,
-  Text,
-  TextStyle,
-  Texture
-} from "pixi.js";
+import * as THREE from "three";
 import "./styles.css";
-import { project, resolveShot, totalDuration, type ShotSpec, type TrackKind } from "./shot-dsl";
+import {
+  compileMotionPlan,
+  defaultDirectorPrompt,
+  resolveBeat,
+  type MotionBeat,
+  type MotionKind,
+  type MotionPlan
+} from "./motion-plan";
+import { RiggedActor } from "./rigged-actor";
 
 const $ = <T extends HTMLElement>(selector: string) => document.querySelector(selector) as T;
-const duration = () => totalDuration();
-
-const app = new Application();
-await app.init({
-  width: project.width,
-  height: project.height,
-  background: "#07080a",
-  antialias: true,
-  resolution: 1,
-  autoDensity: false,
-  preference: "webgl",
-  preserveDrawingBuffer: true
-});
-app.ticker.stop();
-$("#stageMount").appendChild(app.canvas);
-
-const [backgroundTexture, heroTexture, commanderTexture] = await Promise.all([
-  Assets.load<Texture>("/assets/frontier-courtyard.png"),
-  Assets.load<Texture>("/assets/black-swordsman.png"),
-  Assets.load<Texture>("/assets/spear-commander.png")
-]);
-
-const camera = new Container();
-const background = new Sprite(backgroundTexture);
-background.anchor.set(0.5);
-background.position.set(project.width / 2, project.height / 2);
-background.width = project.width;
-background.height = project.height;
-camera.addChild(background);
-
-const shadowLayer = new Container();
-const actorLayer = new Container();
-const effects = new Container();
-const hero = new Sprite(heroTexture);
-const commander = new Sprite(commanderTexture);
-hero.anchor.set(0.5, 1);
-commander.anchor.set(0.5, 1);
-hero.height = 530;
-hero.scale.x = hero.scale.y;
-commander.height = 505;
-commander.scale.x = commander.scale.y;
-actorLayer.addChild(hero, commander);
-camera.addChild(shadowLayer, actorLayer, effects);
-app.stage.addChild(camera);
-
-const grade = new Graphics().rect(0, 0, project.width, project.height).fill({ color: 0x12070c, alpha: 0.08 });
-const flash = new Graphics().rect(0, 0, project.width, project.height).fill({ color: 0xffffff, alpha: 1 });
-flash.alpha = 0;
-const letterbox = new Graphics()
-  .rect(0, 0, project.width, 40)
-  .rect(0, project.height - 40, project.width, 40)
-  .fill({ color: 0x020304, alpha: 0.96 });
-app.stage.addChild(grade, flash, letterbox);
-
-const subtitleStyle = new TextStyle({
-  fill: "#f2f0e9",
-  fontFamily: "Songti SC, STSong, serif",
-  fontSize: 34,
-  fontWeight: "600",
-  stroke: { color: "#080808", width: 8 },
-  dropShadow: { color: "#000000", alpha: 0.8, blur: 4, distance: 2 }
-});
-const subtitle = new Text({ text: "", style: subtitleStyle });
-subtitle.anchor.set(0.5);
-subtitle.position.set(project.width / 2, project.height - 82);
-app.stage.addChild(subtitle);
-
 const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
-const easeInOut = (value: number) => {
-  const t = clamp(value);
-  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-};
-const easeOut = (value: number) => 1 - Math.pow(1 - clamp(value), 3);
-
-const clearEffects = () => {
-  effects.removeChildren().forEach((child) => child.destroy());
-  shadowLayer.removeChildren().forEach((child) => child.destroy());
-};
-
-const addGroundShadow = (x: number, y: number, width: number, alpha = 0.24) => {
-  const shadow = new Graphics().ellipse(x, y, width, 18).fill({ color: 0x000000, alpha });
-  shadowLayer.addChild(shadow);
-};
-
-const addSpeedLines = (amount: number, direction = 1) => {
-  for (let index = 0; index < 24; index += 1) {
-    const y = 70 + ((index * 83) % 560);
-    const length = 90 + ((index * 47) % 250) * amount;
-    const x = direction > 0 ? 30 + ((index * 113) % 900) : 1250 - ((index * 113) % 900);
-    effects
-      .addChild(new Graphics())
-      .moveTo(x, y)
-      .lineTo(x + length * direction, y + ((index % 3) - 1) * 8)
-      .stroke({ color: index % 4 === 0 ? 0xffd4a1 : 0xdce6ee, width: index % 5 === 0 ? 5 : 2, alpha: 0.16 + amount * 0.33 });
-  }
-};
-
-const addSparks = (amount: number) => {
-  const cx = 666;
-  const cy = 338;
-  for (let index = 0; index < 18; index += 1) {
-    const angle = (Math.PI * 2 * index) / 18 + 0.14;
-    const length = (60 + (index % 5) * 20) * amount;
-    effects
-      .addChild(new Graphics())
-      .moveTo(cx + Math.cos(angle) * 15, cy + Math.sin(angle) * 15)
-      .lineTo(cx + Math.cos(angle) * length, cy + Math.sin(angle) * length)
-      .stroke({ color: index % 3 === 0 ? 0xffffff : 0xffbd63, width: index % 4 === 0 ? 6 : 3, alpha: 0.85 * amount });
-  }
-  effects.addChild(new Graphics().circle(cx, cy, 35 * amount).fill({ color: 0xfff3c6, alpha: 0.72 * amount }));
-};
-
-const renderAt = (time: number) => {
-  clearEffects();
-  const { shot, index, localTime } = resolveShot(Math.min(time, Math.max(0, duration() - 0.001)));
-  const p = clamp(localTime / shot.duration);
-  const intensity = shot.intensity / 100;
-
-  camera.position.set(0, 0);
-  camera.pivot.set(project.width / 2, project.height / 2);
-  camera.position.set(project.width / 2, project.height / 2);
-  camera.scale.set(1);
-  actorLayer.filters = [];
-  background.tint = 0xffffff;
-  hero.alpha = 1;
-  commander.alpha = 1;
-  hero.rotation = 0;
-  commander.rotation = 0;
-  flash.alpha = 0;
-  subtitle.text = "";
-
-  const baseHeroScale = 530 / heroTexture.height;
-  const baseCommanderScale = 505 / commanderTexture.height;
-  hero.scale.set(baseHeroScale);
-  commander.scale.set(baseCommanderScale);
-
-  if (index === 0) {
-    const push = 1 + easeInOut(p) * 0.055 * intensity;
-    camera.scale.set(push);
-    hero.position.set(335, 668);
-    commander.position.set(965, 668);
-    addGroundShadow(335, 669, 180);
-    addGroundShadow(965, 669, 210);
-  } else if (index === 1) {
-    camera.scale.set(1.38 + p * 0.1);
-    camera.pivot.set(390 - p * 18, 395);
-    hero.position.set(410 + p * 34, 680);
-    commander.position.set(1050, 668);
-    commander.alpha = 0.48;
-    subtitle.text = p > 0.24 && p < 0.9 ? "让开。" : "";
-    addGroundShadow(hero.x, 681, 200);
-  } else if (index === 2) {
-    camera.scale.set(1.32 + easeInOut(p) * 0.08);
-    camera.pivot.set(865, 405);
-    hero.position.set(255, 668);
-    hero.alpha = 0.35;
-    commander.position.set(876 - p * 14, 672);
-    commander.rotation = -0.018 * intensity;
-    subtitle.text = p > 0.35 ? "此门，不能过。" : "";
-    addGroundShadow(commander.x, 673, 240);
-  } else if (index === 3) {
-    const travel = easeOut(p);
-    background.tint = 0xd2b9b5;
-    hero.position.set(-180 + travel * 970, 672);
-    hero.rotation = 0.07;
-    commander.position.set(920, 672);
-    addSpeedLines(0.5 + p * intensity, 1);
-    for (let trail = 1; trail <= 3; trail += 1) {
-      const ghost = new Sprite(heroTexture);
-      ghost.anchor.set(0.5, 1);
-      ghost.scale.set(baseHeroScale);
-      ghost.position.set(hero.x - trail * 75, hero.y);
-      ghost.rotation = hero.rotation;
-      ghost.alpha = (0.16 / trail) * intensity;
-      effects.addChildAt(ghost, 0);
-    }
-  } else if (index === 4) {
-    const hit = 1 - Math.abs(p - 0.48) * 2;
-    camera.scale.set(1.65);
-    camera.pivot.set(645, 365);
-    const shake = Math.sin(p * 90) * clamp(hit) * 15 * intensity;
-    camera.position.x += shake;
-    camera.position.y += Math.cos(p * 77) * clamp(hit) * 9 * intensity;
-    hero.position.set(545, 675);
-    hero.rotation = 0.15;
-    commander.position.set(770, 675);
-    commander.rotation = -0.08;
-    flash.alpha = p > 0.38 && p < 0.55 ? (1 - Math.abs(p - 0.465) * 12) * 0.75 : 0;
-    addSparks(clamp(hit));
-  } else if (index === 5) {
-    const travel = easeInOut(p);
-    actorLayer.filters = [new BlurFilter({ strength: 1.3 + intensity * 1.5, quality: 2 })];
-    camera.scale.set(1.13);
-    camera.pivot.x = 640 + (travel - 0.5) * 100;
-    hero.position.set(390 + travel * 800, 675);
-    hero.rotation = 0.07;
-    commander.position.set(890 - travel * 780, 675);
-    commander.rotation = -0.05;
-    addSpeedLines(0.7 + intensity * 0.2, travel < 0.5 ? 1 : -1);
-  } else if (index === 6) {
-    camera.scale.set(1.05);
-    hero.position.set(1120 + p * 80, 675);
-    commander.position.set(70 - p * 70, 675);
-    hero.alpha = 1 - easeOut(p * 2);
-    commander.alpha = 1 - easeOut(p * 2);
-    const dust = new Graphics();
-    for (let index = 0; index < 10; index += 1) {
-      dust.circle(380 + index * 58, 620 - Math.sin(index * 1.7) * 20 - p * 25, 18 + (index % 3) * 7)
-        .fill({ color: 0x8d7c72, alpha: (0.16 + (index % 2) * 0.05) * (1 - p) });
-    }
-    effects.addChild(dust);
-  } else {
-    camera.scale.set(2.55 + easeInOut(p) * 0.16);
-    camera.pivot.set(405, 265);
-    hero.position.set(420, 680);
-    commander.position.set(1100, 680);
-    commander.alpha = 0;
-    subtitle.text = p > 0.3 && p < 0.88 ? "你听见刀风了吗？" : "";
-    if (p > 0.76) {
-      const glint = new Graphics()
-        .moveTo(405, 260)
-        .lineTo(520, 242)
-        .stroke({ color: 0xeaf8ff, width: 5, alpha: (1 - p) * 2.5 });
-      effects.addChild(glint);
-    }
-  }
-
-  app.renderer.render(app.stage);
-  updateUi(time, shot, index);
-};
-
-let currentTime = 0;
-let playing = false;
-let startedAt = 0;
-let selectedIndex = 0;
-let raf = 0;
-
 const timecode = (seconds: number) => {
   const mins = Math.floor(seconds / 60).toString().padStart(2, "0");
   const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
-  const fraction = Math.floor((seconds % 1) * 100).toString().padStart(2, "0");
-  return `${mins}:${secs}.${fraction}`;
+  const frames = Math.floor((seconds % 1) * 30).toString().padStart(2, "0");
+  return `${mins}:${secs}:${frames}`;
 };
 
-const updateUi = (time: number, shot: ShotSpec, index: number) => {
-  $("#shotLabel").textContent = `${shot.id} · ${shot.title}`;
-  $("#timecode").textContent = `${timecode(time)} / ${timecode(duration())}`;
-  $("#scrubber").setAttribute("max", duration().toFixed(2));
-  ($("#scrubber") as HTMLInputElement).value = Math.min(time, duration()).toFixed(2);
-  $("#playhead").style.left = `calc(82px + (100% - 108px) * ${time / duration()})`;
-  document.querySelectorAll(".clip").forEach((clip) => clip.classList.toggle("active", clip.getAttribute("data-shot") === shot.id));
-  if (selectedIndex !== index) selectShot(index, false);
+const stage = $("#stageMount");
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0d13);
+scene.fog = new THREE.FogExp2(0x0b0e14, 0.055);
+
+const camera = new THREE.PerspectiveCamera(36, 16 / 9, 0.1, 100);
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.08;
+stage.appendChild(renderer.domElement);
+
+const resize = () => {
+  const bounds = stage.getBoundingClientRect();
+  const width = Math.max(640, Math.floor(bounds.width));
+  const height = Math.max(360, Math.floor(bounds.height));
+  renderer.setSize(width, height, false);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+};
+
+const ambient = new THREE.HemisphereLight(0x7187a8, 0x21130f, 1.3);
+scene.add(ambient);
+const keyLight = new THREE.DirectionalLight(0xffd6ae, 3.2);
+keyLight.position.set(-3.5, 6, 4.5);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(2048, 2048);
+keyLight.shadow.camera.left = -6;
+keyLight.shadow.camera.right = 6;
+keyLight.shadow.camera.top = 6;
+keyLight.shadow.camera.bottom = -3;
+scene.add(keyLight);
+const rimLight = new THREE.DirectionalLight(0x6b93d2, 2.1);
+rimLight.position.set(5, 3, -4);
+scene.add(rimLight);
+
+const flatMaterial = (color: number, roughness = 0.88) =>
+  new THREE.MeshStandardMaterial({ color, roughness, flatShading: true });
+
+const courtyard = new THREE.Group();
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(18, 12), flatMaterial(0x343337));
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+courtyard.add(ground);
+
+const addBox = (size: [number, number, number], position: [number, number, number], color: number) => {
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(...size), flatMaterial(color));
+  mesh.position.set(...position);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  courtyard.add(mesh);
+  return mesh;
+};
+
+addBox([10, 0.18, 2.6], [0, -0.12, -0.6], 0x24262c);
+addBox([10, 2.8, 0.34], [0, 1.4, -2.7], 0x262832);
+addBox([2.7, 2.5, 0.5], [0, 1.25, -2.4], 0x12161d);
+addBox([1.05, 3.4, 0.72], [-2.8, 1.7, -2.2], 0x383138);
+addBox([1.05, 3.4, 0.72], [2.8, 1.7, -2.2], 0x383138);
+addBox([7.1, 0.42, 0.9], [0, 3.15, -2.25], 0x493536);
+for (let index = -5; index <= 5; index += 1) {
+  addBox([0.05, 0.018, 5.2], [index * 0.9, 0.012, -0.1], index % 2 === 0 ? 0x494247 : 0x3e3a3f);
+}
+
+const moon = new THREE.Mesh(new THREE.CircleGeometry(0.68, 32), new THREE.MeshBasicMaterial({ color: 0xd9dfdd }));
+moon.position.set(-3.8, 3.55, -2.48);
+courtyard.add(moon);
+
+const lanternMaterial = new THREE.MeshStandardMaterial({ color: 0xa64227, emissive: 0x7a1e10, emissiveIntensity: 1.3 });
+[-3.1, 3.1].forEach((x) => {
+  const lantern = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.19, 0.36, 8), lanternMaterial);
+  lantern.position.set(x, 2.3, -1.75);
+  courtyard.add(lantern);
+  const glow = new THREE.PointLight(0xff6a34, 1.8, 3.4, 2);
+  glow.position.copy(lantern.position);
+  courtyard.add(glow);
+});
+scene.add(courtyard);
+
+const swordsman = new RiggedActor("hero");
+const guardian = new RiggedActor("guardian");
+scene.add(swordsman.root, guardian.root, swordsman.helper, guardian.helper);
+
+const contactFx = new THREE.Group();
+const contactRing = new THREE.Mesh(
+  new THREE.TorusGeometry(0.18, 0.018, 6, 24),
+  new THREE.MeshBasicMaterial({ color: 0xffd18a, transparent: true })
+);
+contactRing.rotation.y = Math.PI / 2;
+contactFx.add(contactRing);
+const sparkMaterial = new THREE.MeshBasicMaterial({ color: 0xffb04b });
+const sparks = Array.from({ length: 10 }, (_, index) => {
+  const spark = new THREE.Mesh(new THREE.BoxGeometry(0.01, 0.01, 0.08 + (index % 3) * 0.035), sparkMaterial);
+  spark.rotation.set(index * 0.47, index * 0.73, index * 0.91);
+  contactFx.add(spark);
+  return spark;
+});
+contactFx.visible = false;
+scene.add(contactFx);
+
+let activePlan = compileMotionPlan(defaultDirectorPrompt);
+let currentTime = 0;
+let playing = false;
+let startedAt = 0;
+let frameRequest = 0;
+let lastBeatIndex = -1;
+
+const cameraFor = (kind: MotionKind, progress: number) => {
+  const positions: Record<MotionKind, THREE.Vector3> = {
+    enter: new THREE.Vector3(0.25, 2.15, 6.9),
+    scan: new THREE.Vector3(-0.55, 1.98, 5.7),
+    speak: new THREE.Vector3(-1.12, 1.88, 4.65),
+    draw: new THREE.Vector3(-0.45, 1.92, 5.25),
+    dodge: new THREE.Vector3(-0.2, 2.04, 5.7),
+    clash: new THREE.Vector3(0.15, 1.83, 4.75),
+    recoil: new THREE.Vector3(-0.15, 2.02, 5.45),
+    recover: new THREE.Vector3(0.1, 2.08, 6.1)
+  };
+  const target = positions[kind].clone();
+  target.x += Math.sin(progress * Math.PI) * (kind === "clash" ? 0.12 : 0.035);
+  camera.position.copy(target);
+  const lookX = kind === "speak" ? -1.25 : kind === "recoil" ? -0.35 : 0;
+  camera.lookAt(lookX, 1.18, 0);
+};
+
+const setConstraintChips = (beat: MotionBeat) => {
+  const chips: string[] = [];
+  if (beat.constraints.rootMotion) chips.push("ROOT MOTION");
+  if (beat.constraints.footLock) chips.push("FOOT LOCK");
+  if (beat.constraints.handProp) chips.push("HAND IK");
+  if (beat.constraints.contactTarget) chips.push("CONTACT SYNC");
+  if (beat.constraints.gazeTarget) chips.push("GAZE");
+  $("#constraintChips").innerHTML = chips.map((chip) => `<span>${chip}</span>`).join("");
+};
+
+const updateUi = (beat: MotionBeat, index: number) => {
+  $("#currentAction").textContent = beat.label;
+  $("#beatCode").textContent = `${beat.id} / ${String(activePlan.beats.length).padStart(2, "0")}`;
+  $("#timecode").textContent = `${timecode(currentTime)} / ${timecode(activePlan.duration)}`;
+  const scrubber = $("#scrubber") as HTMLInputElement;
+  scrubber.max = activePlan.duration.toFixed(3);
+  scrubber.value = currentTime.toFixed(3);
+  $("#playhead").style.left = `${(currentTime / activePlan.duration) * 100}%`;
+  document.querySelectorAll(".motion-clip").forEach((node) => {
+    node.classList.toggle("active", node.getAttribute("data-beat") === beat.id);
+  });
+  if (index !== lastBeatIndex) {
+    lastBeatIndex = index;
+    setConstraintChips(beat);
+  }
+  const subtitle = $("#subtitle");
+  subtitle.textContent = beat.dialogue ?? "";
+  subtitle.classList.toggle("visible", Boolean(beat.dialogue));
+};
+
+const renderAt = (time: number) => {
+  currentTime = clamp(time, 0, Math.max(0, activePlan.duration - 0.001));
+  const { beat, index, progress } = resolveBeat(activePlan, currentTime);
+  const previousKind = index > 0 ? activePlan.beats[index - 1].kind : beat.kind;
+  swordsman.update(beat.kind, progress, currentTime, previousKind);
+  guardian.update(beat.kind, progress, currentTime, previousKind);
+  cameraFor(beat.kind, progress);
+
+  const impact = beat.kind === "clash" ? Math.max(0, 1 - Math.abs(progress - 0.68) / 0.12) : 0;
+  contactFx.visible = impact > 0;
+  if (contactFx.visible) {
+    const a = swordsman.getWeaponTip();
+    const b = guardian.getWeaponTip();
+    contactFx.position.copy(a.add(b).multiplyScalar(0.5));
+    const scale = 0.7 + impact;
+    contactFx.scale.setScalar(scale);
+    contactRing.material.opacity = impact;
+    sparks.forEach((spark, sparkIndex) => {
+      spark.position.set(
+        Math.cos(sparkIndex * 2.1) * impact * 0.16,
+        Math.sin(sparkIndex * 1.7) * impact * 0.16,
+        Math.sin(sparkIndex * 2.8) * impact * 0.1
+      );
+    });
+    keyLight.intensity = 3.2 + impact * 5;
+  } else {
+    keyLight.intensity = 3.2;
+  }
+
+  renderer.render(scene, camera);
+  updateUi(beat, index);
+};
+
+const renderPlan = () => {
+  $("#planSummary").textContent = `${activePlan.beats.length} 个动作节拍 · ${activePlan.duration.toFixed(1)} 秒`;
+  $("#planList").innerHTML = activePlan.beats
+    .map(
+      (beat) => `
+        <button class="plan-beat" data-seek="${beat.start}" data-id="${beat.id}">
+          <span>${beat.id}</span>
+          <strong>${beat.label}</strong>
+          <small>${beat.duration.toFixed(2)}s</small>
+        </button>`
+    )
+    .join("");
+  document.querySelectorAll<HTMLButtonElement>(".plan-beat").forEach((button) => {
+    button.addEventListener("click", () => {
+      playing = false;
+      $("#playButton").textContent = "▶";
+      renderAt(Number(button.dataset.seek ?? 0) + 0.001);
+    });
+  });
+
+  $("#motionTrack").innerHTML = activePlan.beats
+    .map(
+      (beat) => `<button class="motion-clip ${beat.kind}" data-beat="${beat.id}" data-seek="${beat.start}"
+        style="left:${(beat.start / activePlan.duration) * 100}%;width:${(beat.duration / activePlan.duration) * 100}%">
+        ${beat.label}
+      </button>`
+    )
+    .join("");
+  document.querySelectorAll<HTMLButtonElement>(".motion-clip").forEach((button) => {
+    button.addEventListener("click", () => renderAt(Number(button.dataset.seek ?? 0) + 0.001));
+  });
+  $("#timelineRuler").innerHTML = Array.from({ length: Math.ceil(activePlan.duration) + 1 }, (_, second) =>
+    second % 2 === 0
+      ? `<span style="left:${(second / activePlan.duration) * 100}%">${second}s</span>`
+      : ""
+  ).join("");
+  const warning = activePlan.warnings[0];
+  $("#plannerWarning").textContent = warning ?? "动作语义已编译为可编辑约束计划。";
+  $("#plannerWarning").classList.toggle("warning", Boolean(warning));
 };
 
 const loop = (now: number) => {
   if (!playing) return;
-  currentTime = (now - startedAt) / 1000;
-  if (currentTime >= duration()) {
-    currentTime = duration();
+  const elapsed = (now - startedAt) / 1000;
+  if (elapsed >= activePlan.duration) {
     playing = false;
+    currentTime = activePlan.duration - 0.001;
     $("#playButton").textContent = "▶";
-    $("#transportState").textContent = "ENDED";
-    renderAt(currentTime - 0.001);
+    $("#runtimeState").textContent = "COMPLETE";
+    renderAt(currentTime);
     return;
   }
-  renderAt(currentTime);
-  raf = window.setTimeout(() => loop(performance.now()), 1000 / project.fps);
+  renderAt(elapsed);
+  frameRequest = requestAnimationFrame(loop);
 };
 
-const play = () => {
+const togglePlayback = () => {
   if (playing) {
     playing = false;
-    clearTimeout(raf);
+    cancelAnimationFrame(frameRequest);
     $("#playButton").textContent = "▶";
-    $("#transportState").textContent = "PAUSED";
+    $("#runtimeState").textContent = "PAUSED";
     return;
   }
-  if (currentTime >= duration() - 0.01) currentTime = 0;
+  if (currentTime >= activePlan.duration - 0.03) currentTime = 0;
   playing = true;
   startedAt = performance.now() - currentTime * 1000;
   $("#playButton").textContent = "Ⅱ";
-  $("#transportState").textContent = "PLAYING";
-  void playImpactAudio(currentTime);
-  loop(performance.now());
-};
-
-const selectShot = (index: number, seek = true) => {
-  selectedIndex = index;
-  const shot = project.shots[index];
-  $("#shotIndex").textContent = `${String(index + 1).padStart(2, "0")} / ${String(project.shots.length).padStart(2, "0")}`;
-  $("#shotTitle").textContent = shot.title;
-  $("#shotIntent").textContent = shot.intent;
-  ($("#intensityInput") as HTMLInputElement).value = String(shot.intensity);
-  ($("#durationInput") as HTMLInputElement).value = String(shot.duration);
-  $("#intensityValue").textContent = String(shot.intensity);
-  $("#durationValue").textContent = `${shot.duration.toFixed(1)}s`;
-  $("#eventList").innerHTML = shot.events
-    .map((event) => `<div class="event-item"><span class="event-kind">${event.kind.toUpperCase()}</span><span class="event-label">${event.label}</span></div>`)
-    .join("");
-  if (seek) {
-    currentTime = project.shots.slice(0, index).reduce((sum, item) => sum + item.duration, 0) + 0.01;
-    playing = false;
-    $("#playButton").textContent = "▶";
-    renderTimeline();
-    renderAt(currentTime);
-  }
-};
-
-const renderTimeline = () => {
-  const kinds: Record<TrackKind, HTMLElement> = {
-    camera: $("#cameraTrack"),
-    actor: $("#actorTrack"),
-    vfx: $("#vfxTrack")
-  };
-  Object.values(kinds).forEach((track) => (track.innerHTML = ""));
-  let cursor = 0;
-  for (const shot of project.shots) {
-    for (const event of shot.events) {
-      const clip = document.createElement("button");
-      clip.className = `clip ${event.kind}`;
-      clip.dataset.shot = shot.id;
-      clip.style.left = `${(cursor / duration()) * 100}%`;
-      clip.style.width = `${(shot.duration / duration()) * 100}%`;
-      clip.textContent = `${shot.id} ${event.label}`;
-      clip.addEventListener("click", () => selectShot(project.shots.indexOf(shot)));
-      kinds[event.kind].appendChild(clip);
-    }
-    cursor += shot.duration;
-  }
-  $("#timelineRuler").innerHTML = "";
-  for (let second = 0; second <= Math.ceil(duration()); second += 2) {
-    const mark = document.createElement("span");
-    mark.className = "ruler-mark";
-    mark.style.left = `${(second / duration()) * 100}%`;
-    mark.textContent = `${second}s`;
-    $("#timelineRuler").appendChild(mark);
-  }
-};
-
-let audioContext: AudioContext | null = null;
-const playImpactAudio = async (offset: number) => {
-  audioContext ??= new AudioContext();
-  await audioContext.resume();
-  const impactAt = project.shots.slice(0, 4).reduce((sum, item) => sum + item.duration, 0) + 0.45;
-  const delay = impactAt - offset;
-  if (delay < 0) return;
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-  oscillator.type = "sawtooth";
-  oscillator.frequency.setValueAtTime(110, audioContext.currentTime + delay);
-  oscillator.frequency.exponentialRampToValueAtTime(38, audioContext.currentTime + delay + 0.22);
-  gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-  gain.gain.setValueAtTime(0.14, audioContext.currentTime + delay);
-  gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + delay + 0.35);
-  oscillator.connect(gain).connect(audioContext.destination);
-  oscillator.start(audioContext.currentTime + delay);
-  oscillator.stop(audioContext.currentTime + delay + 0.36);
+  $("#runtimeState").textContent = "EXECUTING";
+  frameRequest = requestAnimationFrame(loop);
 };
 
 const showToast = (message: string) => {
@@ -383,23 +293,22 @@ const exportMp4 = async () => {
   const button = $("#exportButton") as HTMLButtonElement;
   button.disabled = true;
   button.textContent = "实时渲染中…";
-  const stream = app.canvas.captureStream(project.fps);
+  playing = false;
+  const stream = renderer.domElement.captureStream(30);
   const mimeType = MediaRecorder.isTypeSupported("video/webm;codecs=vp9") ? "video/webm;codecs=vp9" : "video/webm";
-  const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 8_000_000 });
+  const recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 9_000_000 });
   const chunks: BlobPart[] = [];
   recorder.ondataavailable = (event) => event.data.size && chunks.push(event.data);
   const completed = new Promise<void>((resolve) => (recorder.onstop = () => resolve()));
-  playing = false;
-  currentTime = 0;
   recorder.start(250);
   const exportStart = performance.now();
   await new Promise<void>((resolve) => {
     const tick = (now: number) => {
       const elapsed = (now - exportStart) / 1000;
-      renderAt(Math.min(elapsed, duration() - 0.001));
-      button.textContent = `实时渲染 ${Math.min(100, Math.floor((elapsed / duration()) * 100))}%`;
-      if (elapsed >= duration()) resolve();
-      else window.setTimeout(() => tick(performance.now()), 1000 / project.fps);
+      renderAt(Math.min(elapsed, activePlan.duration - 0.001));
+      button.textContent = `渲染 ${Math.min(100, Math.floor((elapsed / activePlan.duration) * 100))}%`;
+      if (elapsed >= activePlan.duration) resolve();
+      else window.setTimeout(() => tick(performance.now()), 1000 / 30);
     };
     tick(performance.now());
   });
@@ -416,38 +325,42 @@ const exportMp4 = async () => {
   const href = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = href;
-  link.download = "暮关一刃-vertical-slice.mp4";
+  link.download = "墨刃-骨骼动作验收.mp4";
   link.click();
   URL.revokeObjectURL(href);
   button.disabled = false;
   button.textContent = "导出 MP4";
-  showToast("MP4 已导出，同时保存到 exports 目录");
+  showToast("骨骼动作样片已导出");
 };
 
-$("#playButton").addEventListener("click", play);
+($("#directorPrompt") as HTMLTextAreaElement).value = defaultDirectorPrompt;
+$("#compileButton").addEventListener("click", () => {
+  const prompt = ($("#directorPrompt") as HTMLTextAreaElement).value;
+  activePlan = compileMotionPlan(prompt);
+  currentTime = 0;
+  lastBeatIndex = -1;
+  renderPlan();
+  renderAt(0);
+  $("#runtimeState").textContent = "PLAN READY";
+});
+$("#playButton").addEventListener("click", togglePlayback);
 $("#resetButton").addEventListener("click", () => {
   playing = false;
-  currentTime = 0;
+  cancelAnimationFrame(frameRequest);
   $("#playButton").textContent = "▶";
+  $("#runtimeState").textContent = "PLAN READY";
   renderAt(0);
 });
 $("#scrubber").addEventListener("input", (event) => {
   playing = false;
-  currentTime = Number((event.target as HTMLInputElement).value);
+  cancelAnimationFrame(frameRequest);
   $("#playButton").textContent = "▶";
-  renderAt(currentTime);
+  renderAt(Number((event.target as HTMLInputElement).value));
 });
-$("#intensityInput").addEventListener("input", (event) => {
-  const value = Number((event.target as HTMLInputElement).value);
-  project.shots[selectedIndex].intensity = value;
-  $("#intensityValue").textContent = String(value);
-  renderAt(currentTime);
-});
-$("#durationInput").addEventListener("input", (event) => {
-  const value = Number((event.target as HTMLInputElement).value);
-  project.shots[selectedIndex].duration = value;
-  $("#durationValue").textContent = `${value.toFixed(1)}s`;
-  renderTimeline();
+$("#skeletonToggle").addEventListener("change", (event) => {
+  const visible = (event.target as HTMLInputElement).checked;
+  swordsman.setDebugSkeleton(visible);
+  guardian.setDebugSkeleton(visible);
   renderAt(currentTime);
 });
 $("#exportButton").addEventListener("click", () => {
@@ -459,26 +372,31 @@ $("#exportButton").addEventListener("click", () => {
   });
 });
 
-renderTimeline();
-selectShot(0, false);
+renderPlan();
+resize();
 renderAt(0);
+new ResizeObserver(() => {
+  resize();
+  renderAt(currentTime);
+}).observe(stage);
 
 declare global {
   interface Window {
-    motionComic: {
+    motionLab: {
+      compile: (prompt: string) => MotionPlan;
       renderAt: (time: number) => void;
-      project: typeof project;
+      getPlan: () => MotionPlan;
     };
   }
 }
-window.motionComic = {
-  renderAt: (time: number) => {
-    playing = false;
-    clearTimeout(raf);
-    currentTime = clamp(time, 0, duration());
-    $("#playButton").textContent = "▶";
-    $("#transportState").textContent = "PAUSED";
-    renderAt(currentTime);
+
+window.motionLab = {
+  compile: (prompt: string) => {
+    activePlan = compileMotionPlan(prompt);
+    renderPlan();
+    renderAt(0);
+    return activePlan;
   },
-  project
+  renderAt,
+  getPlan: () => activePlan
 };

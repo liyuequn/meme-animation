@@ -4,19 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#090b10" />
-    <title>墨刃 · 动态漫 Runtime</title>
+    <title>墨刃 · AI 骨骼动作实验室</title>
   </head>
   <body>
     <main class="app-shell">
       <header class="topbar">
         <div class="brand-block">
-          <div class="brand-mark">墨</div>
+          <div class="brand-mark">刃</div>
           <div>
-            <strong>墨刃 Runtime</strong>
-            <span>SHOT DSL / VERTICAL SLICE 01</span>
+            <strong>墨刃 Motion Lab</strong>
+            <span>AI DIRECTOR / SKELETAL RUNTIME</span>
           </div>
         </div>
+        <div class="runtime-badge"><i></i><span id="runtimeState">PLAN READY</span></div>
         <div class="top-actions">
+          <label class="debug-toggle"><input id="skeletonToggle" type="checkbox" /> 显示骨骼</label>
           <button id="resetButton" class="button ghost">回到开头</button>
           <button id="exportButton" class="button export">导出 MP4</button>
         </div>
@@ -27,57 +29,57 @@
           <div class="stage-frame">
             <div id="stageMount" class="stage-mount"></div>
             <div class="stage-chrome">
-              <span id="shotLabel">S01 · 建立空间</span>
-              <span id="timecode">00:00.00 / 00:16.00</span>
+              <div>
+                <span id="beatCode">M01 / 08</span>
+                <strong id="currentAction">走入场景</strong>
+              </div>
+              <span id="timecode">00:00:00 / 00:13:12</span>
             </div>
+            <div class="constraint-chips" id="constraintChips"></div>
+            <div class="subtitle" id="subtitle"></div>
+            <div class="stage-note">实时骨骼关节 · 非立绘位移</div>
           </div>
 
           <div class="transport">
             <button id="playButton" class="play-button" aria-label="播放">▶</button>
-            <input id="scrubber" type="range" min="0" max="16" step="0.01" value="0" />
-            <span id="transportState">READY</span>
+            <input id="scrubber" type="range" min="0" max="13" step="0.001" value="0" />
+            <span>30 FPS</span>
           </div>
         </div>
 
-        <aside class="inspector">
+        <aside class="director-panel">
           <div class="panel-heading">
-            <span>镜头参数</span>
-            <span id="shotIndex">01 / 08</span>
+            <span>AI DIRECTOR</span>
+            <span>SEMANTIC MOTION</span>
           </div>
-          <div class="shot-meta">
-            <span class="eyebrow">CURRENT SHOT</span>
-            <h1 id="shotTitle">建立空间</h1>
-            <p id="shotIntent">用远景建立双方距离与暮色压迫感。</p>
+          <div class="prompt-block">
+            <label for="directorPrompt">用自然语言指挥角色</label>
+            <textarea id="directorPrompt" rows="6"></textarea>
+            <button id="compileButton" class="compile-button">生成动作计划并执行</button>
+            <p id="plannerWarning" class="planner-note"></p>
           </div>
-          <label class="field">
-            <span>镜头强度 <b id="intensityValue">72</b></span>
-            <input id="intensityInput" type="range" min="25" max="100" value="72" />
-          </label>
-          <label class="field">
-            <span>镜头时长 <b id="durationValue">2.2s</b></span>
-            <input id="durationInput" type="range" min="0.8" max="4" step="0.1" value="2.2" />
-          </label>
-          <div class="event-list" id="eventList"></div>
-          <div class="runtime-note">
-            <span class="status-dot"></span>
-            修改参数只重算当前 Shot
+          <div class="plan-heading">
+            <strong>动作计划</strong>
+            <span id="planSummary">8 个动作节拍</span>
+          </div>
+          <div class="plan-list" id="planList"></div>
+          <div class="engine-stack">
+            <div><span>BODY</span><b>18-BONE RIG</b></div>
+            <div><span>CONTACT</span><b>WEAPON SYNC</b></div>
+            <div><span>OUTPUT</span><b>3D TOON</b></div>
           </div>
         </aside>
       </section>
 
       <section class="timeline-panel">
+        <div class="timeline-title">
+          <span>MOTION PLAN</span>
+          <span>自然语言 → 动作语义 → 骨骼执行</span>
+        </div>
         <div class="timeline-ruler" id="timelineRuler"></div>
         <div class="track-row">
-          <div class="track-label">CAM</div>
-          <div class="track" id="cameraTrack"></div>
-        </div>
-        <div class="track-row">
-          <div class="track-label">ACT</div>
-          <div class="track" id="actorTrack"></div>
-        </div>
-        <div class="track-row">
-          <div class="track-label">VFX</div>
-          <div class="track" id="vfxTrack"></div>
+          <div class="track-label">ACTOR</div>
+          <div class="track" id="motionTrack"></div>
         </div>
         <div class="playhead" id="playhead"></div>
       </section>

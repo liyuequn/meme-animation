@@ -22,7 +22,7 @@ const mp4ExportPlugin = (): Plugin => ({
         await mkdir(exportDirectory, { recursive: true });
         const stamp = new Date().toISOString().replace(/[:.]/g, "-");
         const webmPath = resolve(exportDirectory, `.capture-${stamp}.webm`);
-        const mp4Path = resolve(exportDirectory, `暮关一刃-${stamp}.mp4`);
+        const mp4Path = resolve(exportDirectory, `墨刃-骨骼动作-${stamp}.mp4`);
         await writeFile(webmPath, Buffer.concat(chunks));
         await execFileAsync("ffmpeg", [
           "-y",

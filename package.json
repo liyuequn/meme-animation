@@ -10,10 +10,11 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "pixi.js": "^8.13.2"
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
+    "@types/three": "^0.180.0",
     "typescript": "^5.9.2",
     "vite": "^7.1.5"
   }
