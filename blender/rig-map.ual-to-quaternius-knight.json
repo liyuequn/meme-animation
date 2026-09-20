@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "sourceRig": "Quaternius Universal Animation Library",
+  "targetRig": "Quaternius Animated Knight",
+  "rotationMap": {
+    "root": "Bone",
+    "pelvis": "Hips",
+    "spine_01": "Abdomen",
+    "spine_02": "Torso",
+    "neck_01": "Neck",
+    "Head": "Head",
+    "clavicle_l": "Shoulder.L",
+    "upperarm_l": "UpperArm.L",
+    "lowerarm_l": "LowerArm.L",
+    "hand_l": "Palm.L",
+    "clavicle_r": "Shoulder.R",
+    "upperarm_r": "UpperArm.R",
+    "lowerarm_r": "LowerArm.R",
+    "hand_r": "Palm.R",
+    "thigh_l": "UpperLeg.L",
+    "calf_l": "LowerLeg.L",
+    "foot_l": "Foot.L",
+    "thigh_r": "UpperLeg.R",
+    "calf_r": "LowerLeg.R",
+    "foot_r": "Foot.R"
+  },
+  "translationMap": {
+    "pelvis": "Hips"
+  }
+}

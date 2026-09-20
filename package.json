@@ -9,7 +9,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "check": "tsc --noEmit && python3 scripts/validate_motion_bindings.py",
     "motion:catalog": "./scripts/build_motion_catalog.sh",
-    "motion:search": "python3 scripts/search_motion_library.py"
+    "motion:search": "python3 scripts/search_motion_library.py",
+    "motion:retarget": "./scripts/retarget_motion.sh"
   },
   "dependencies": {
     "three": "^0.180.0"

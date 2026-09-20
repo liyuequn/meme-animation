@@ -46,6 +46,14 @@ python3 scripts/search_motion_library.py "持剑攻击"
 
 目录位于 `blender/motion-library.catalog.json`，包含动作名、分类、时长、骨架、文件校验和与 root-motion 标记。`blender/motion-bindings.json` 将验收动作语义绑定到候选片段；Director 生成的每个节拍已携带这些候选，而不是只输出无法执行的标签。
 
+### 跨骨架重定向
+
+```bash
+./scripts/retarget_motion.sh Sword_Regular_Combo
+```
+
+该命令把 UAL 动作通过外置骨骼映射重定向到另一套角色骨架，输出可继续编辑的 `.blend`、检查报告和五张采样帧。更换正式角色时只需新增对应 rig map，不改 Director 的动作语义。
+
 [查看 10 秒验证视频](docs/blender-motion-validation.mp4)
 
 ![Blender 骨骼动作验证分镜](docs/blender-motion-validation-contact-sheet.png)
