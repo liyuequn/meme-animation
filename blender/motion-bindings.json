@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "bindings": {
+    "enter": {
+      "query": "走入场景",
+      "coverage": "exact",
+      "candidates": [
+        { "clipId": "ual1-rm:walk-loop", "role": "primary" },
+        { "clipId": "ual1-rm:walk-formal-loop", "role": "alternate" }
+      ]
+    },
+    "scan": {
+      "query": "站定环顾",
+      "coverage": "missing",
+      "candidates": [
+        { "clipId": "ual1:idle-loop", "role": "body-layer" }
+      ],
+      "note": "动作库没有真正的环顾动作，需要视线/头颈层或新动作。"
+    },
+    "speak": {
+      "query": "站立说话",
+      "coverage": "exact",
+      "candidates": [
+        { "clipId": "ual1:idle-talking-loop", "role": "primary" }
+      ]
+    },
+    "draw": {
+      "query": "拔刀进入持剑架势",
+      "coverage": "missing",
+      "candidates": [
+        { "clipId": "ual1:sword-idle", "role": "end-pose" }
+      ],
+      "note": "只有持剑待机，没有从刀鞘拔刀的过渡，必须补动作。"
+    },
+    "dodge": {
+      "query": "转身闪避",
+      "coverage": "partial",
+      "candidates": [
+        { "clipId": "ual1-rm:roll", "role": "primary" },
+        { "clipId": "ual2-rm:slide-start", "role": "alternate" }
+      ],
+      "note": "可验证位移闪避，但武侠转身身法仍需专用动作。"
+    },
+    "clash": {
+      "query": "持剑前冲与兵器格挡接触",
+      "coverage": "partial",
+      "candidates": [
+        { "clipId": "ual2-rm:sword-dash", "role": "attacker" },
+        { "clipId": "ual2:sword-block", "role": "defender" }
+      ],
+      "note": "动作存在，但接触点、距离和时序仍需 IK/约束求解。"
+    },
+    "recoil": {
+      "query": "受击后退踉跄",
+      "coverage": "exact",
+      "candidates": [
+        { "clipId": "ual2-rm:hit-knockback", "role": "primary" },
+        { "clipId": "ual1:hit-chest", "role": "alternate" }
+      ]
+    },
+    "recover": {
+      "query": "恢复持剑架势",
+      "coverage": "partial",
+      "candidates": [
+        { "clipId": "ual2:sword-regular-a-rec", "role": "transition" },
+        { "clipId": "ual1:sword-idle", "role": "end-pose" }
+      ],
+      "note": "可由攻击恢复片段过渡到持剑待机，需在目标角色上验证姿态连续性。"
+    }
+  }
+}

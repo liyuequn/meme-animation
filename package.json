@@ -7,7 +7,9 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit && python3 scripts/validate_motion_bindings.py",
+    "motion:catalog": "./scripts/build_motion_catalog.sh",
+    "motion:search": "python3 scripts/search_motion_library.py"
   },
   "dependencies": {
     "three": "^0.180.0"

@@ -1,0 +1,2397 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-20",
+  "fps": 30,
+  "library": "Quaternius Universal Animation Library Standard",
+  "license": "CC0-1.0",
+  "sourceUrls": [
+    "https://quaternius.itch.io/universal-animation-library",
+    "https://quaternius.itch.io/universal-animation-library-2"
+  ],
+  "sourceCount": 4,
+  "uniqueActionCount": 85,
+  "sources": [
+    {
+      "id": "ual1",
+      "file": "assets/third_party/quaternius-ual/UAL1_Standard.glb",
+      "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+      "rootMotion": false,
+      "armature": "Armature",
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ],
+      "actionCount": 43,
+      "actions": [
+        {
+          "id": "ual1:a-tpose",
+          "name": "A_TPose",
+          "normalizedName": "a tpose",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual1:crouch-fwd-loop",
+          "name": "Crouch_Fwd_Loop",
+          "normalizedName": "crouch fwd loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual1:crouch-idle-loop",
+          "name": "Crouch_Idle_Loop",
+          "normalizedName": "crouch idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 70.4,
+          "durationFrames": 70.4,
+          "durationSeconds": 2.347
+        },
+        {
+          "id": "ual1:dance-loop",
+          "name": "Dance_Loop",
+          "normalizedName": "dance loop",
+          "tags": [
+            "gesture"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 24.0,
+          "durationFrames": 24.0,
+          "durationSeconds": 0.8
+        },
+        {
+          "id": "ual1:death01",
+          "name": "Death01",
+          "normalizedName": "death01",
+          "tags": [
+            "reaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 57.6,
+          "durationFrames": 57.6,
+          "durationSeconds": 1.92
+        },
+        {
+          "id": "ual1:driving-loop",
+          "name": "Driving_Loop",
+          "normalizedName": "driving loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1:fixing-kneeling",
+          "name": "Fixing_Kneeling",
+          "normalizedName": "fixing kneeling",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 124.8,
+          "durationFrames": 124.8,
+          "durationSeconds": 4.16
+        },
+        {
+          "id": "ual1:hit-chest",
+          "name": "Hit_Chest",
+          "normalizedName": "hit chest",
+          "tags": [
+            "reaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 8.0,
+          "durationFrames": 8.0,
+          "durationSeconds": 0.267
+        },
+        {
+          "id": "ual1:hit-head",
+          "name": "Hit_Head",
+          "normalizedName": "hit head",
+          "tags": [
+            "reaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 10.4,
+          "durationFrames": 10.4,
+          "durationSeconds": 0.347
+        },
+        {
+          "id": "ual1:idle-loop",
+          "name": "Idle_Loop",
+          "normalizedName": "idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual1:idle-talking-loop",
+          "name": "Idle_Talking_Loop",
+          "normalizedName": "idle talking loop",
+          "tags": [
+            "idle",
+            "gesture"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 70.4,
+          "durationFrames": 70.4,
+          "durationSeconds": 2.347
+        },
+        {
+          "id": "ual1:idle-torch-loop",
+          "name": "Idle_Torch_Loop",
+          "normalizedName": "idle torch loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 30.4,
+          "durationFrames": 30.4,
+          "durationSeconds": 1.013
+        },
+        {
+          "id": "ual1:interact",
+          "name": "Interact",
+          "normalizedName": "interact",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual1:jog-fwd-loop",
+          "name": "Jog_Fwd_Loop",
+          "normalizedName": "jog fwd loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 22.4,
+          "durationFrames": 22.4,
+          "durationSeconds": 0.747
+        },
+        {
+          "id": "ual1:jump-land",
+          "name": "Jump_Land",
+          "normalizedName": "jump land",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 30.4,
+          "durationFrames": 30.4,
+          "durationSeconds": 1.013
+        },
+        {
+          "id": "ual1:jump-loop",
+          "name": "Jump_Loop",
+          "normalizedName": "jump loop",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual1:jump-start",
+          "name": "Jump_Start",
+          "normalizedName": "jump start",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual1:pick-up-table",
+          "name": "PickUp_Table",
+          "normalizedName": "pick up table",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.0,
+          "durationFrames": 20.0,
+          "durationSeconds": 0.667
+        },
+        {
+          "id": "ual1:pistol-aim-down",
+          "name": "Pistol_Aim_Down",
+          "normalizedName": "pistol aim down",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 4.0,
+          "durationFrames": 4.0,
+          "durationSeconds": 0.133
+        },
+        {
+          "id": "ual1:pistol-aim-neutral",
+          "name": "Pistol_Aim_Neutral",
+          "normalizedName": "pistol aim neutral",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 4.0,
+          "durationFrames": 4.0,
+          "durationSeconds": 0.133
+        },
+        {
+          "id": "ual1:pistol-aim-up",
+          "name": "Pistol_Aim_Up",
+          "normalizedName": "pistol aim up",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 4.0,
+          "durationFrames": 4.0,
+          "durationSeconds": 0.133
+        },
+        {
+          "id": "ual1:pistol-idle-loop",
+          "name": "Pistol_Idle_Loop",
+          "normalizedName": "pistol idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1:pistol-reload",
+          "name": "Pistol_Reload",
+          "normalizedName": "pistol reload",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1:pistol-shoot",
+          "name": "Pistol_Shoot",
+          "normalizedName": "pistol shoot",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 15.2,
+          "durationFrames": 15.2,
+          "durationSeconds": 0.507
+        },
+        {
+          "id": "ual1:punch-cross",
+          "name": "Punch_Cross",
+          "normalizedName": "punch cross",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 24.0,
+          "durationFrames": 24.0,
+          "durationSeconds": 0.8
+        },
+        {
+          "id": "ual1:punch-jab",
+          "name": "Punch_Jab",
+          "normalizedName": "punch jab",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.8,
+          "durationFrames": 20.8,
+          "durationSeconds": 0.693
+        },
+        {
+          "id": "ual1:push-loop",
+          "name": "Push_Loop",
+          "normalizedName": "push loop",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 64.0,
+          "durationFrames": 64.0,
+          "durationSeconds": 2.133
+        },
+        {
+          "id": "ual1:roll",
+          "name": "Roll",
+          "normalizedName": "roll",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 35.2,
+          "durationFrames": 35.2,
+          "durationSeconds": 1.173
+        },
+        {
+          "id": "ual1:sitting-enter",
+          "name": "Sitting_Enter",
+          "normalizedName": "sitting enter",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 31.2,
+          "durationFrames": 31.2,
+          "durationSeconds": 1.04
+        },
+        {
+          "id": "ual1:sitting-exit",
+          "name": "Sitting_Exit",
+          "normalizedName": "sitting exit",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 24.8,
+          "durationFrames": 24.8,
+          "durationSeconds": 0.827
+        },
+        {
+          "id": "ual1:sitting-idle-loop",
+          "name": "Sitting_Idle_Loop",
+          "normalizedName": "sitting idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1:sitting-talking-loop",
+          "name": "Sitting_Talking_Loop",
+          "normalizedName": "sitting talking loop",
+          "tags": [
+            "gesture"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 70.4,
+          "durationFrames": 70.4,
+          "durationSeconds": 2.347
+        },
+        {
+          "id": "ual1:spell-simple-enter",
+          "name": "Spell_Simple_Enter",
+          "normalizedName": "spell simple enter",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 12.8,
+          "durationFrames": 12.8,
+          "durationSeconds": 0.427
+        },
+        {
+          "id": "ual1:spell-simple-exit",
+          "name": "Spell_Simple_Exit",
+          "normalizedName": "spell simple exit",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 10.4,
+          "durationFrames": 10.4,
+          "durationSeconds": 0.347
+        },
+        {
+          "id": "ual1:spell-simple-idle-loop",
+          "name": "Spell_Simple_Idle_Loop",
+          "normalizedName": "spell simple idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 50.4,
+          "durationFrames": 50.4,
+          "durationSeconds": 1.68
+        },
+        {
+          "id": "ual1:spell-simple-shoot",
+          "name": "Spell_Simple_Shoot",
+          "normalizedName": "spell simple shoot",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 12.0,
+          "durationFrames": 12.0,
+          "durationSeconds": 0.4
+        },
+        {
+          "id": "ual1:sprint-loop",
+          "name": "Sprint_Loop",
+          "normalizedName": "sprint loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 16.0,
+          "durationFrames": 16.0,
+          "durationSeconds": 0.533
+        },
+        {
+          "id": "ual1:swim-fwd-loop",
+          "name": "Swim_Fwd_Loop",
+          "normalizedName": "swim fwd loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual1:swim-idle-loop",
+          "name": "Swim_Idle_Loop",
+          "normalizedName": "swim idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 80.0,
+          "durationFrames": 80.0,
+          "durationSeconds": 2.667
+        },
+        {
+          "id": "ual1:sword-attack",
+          "name": "Sword_Attack",
+          "normalizedName": "sword attack",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 36.8,
+          "durationFrames": 36.8,
+          "durationSeconds": 1.227
+        },
+        {
+          "id": "ual1:sword-idle",
+          "name": "Sword_Idle",
+          "normalizedName": "sword idle",
+          "tags": [
+            "idle",
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1:walk-formal-loop",
+          "name": "Walk_Formal_Loop",
+          "normalizedName": "walk formal loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual1:walk-loop",
+          "name": "Walk_Loop",
+          "normalizedName": "walk loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        }
+      ]
+    },
+    {
+      "id": "ual1-rm",
+      "file": "assets/third_party/quaternius-ual/UAL1_Standard_RM.glb",
+      "sha256": "be684571ed655a1b892c2c07e6e2aeca053b606c442d34004adaf1d944090d01",
+      "rootMotion": true,
+      "armature": "Armature",
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ],
+      "actionCount": 43,
+      "actions": [
+        {
+          "id": "ual1-rm:a-tpose",
+          "name": "A_TPose",
+          "normalizedName": "a tpose",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual1-rm:crouch-fwd-loop",
+          "name": "Crouch_Fwd_Loop",
+          "normalizedName": "crouch fwd loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual1-rm:crouch-idle-loop",
+          "name": "Crouch_Idle_Loop",
+          "normalizedName": "crouch idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 70.4,
+          "durationFrames": 70.4,
+          "durationSeconds": 2.347
+        },
+        {
+          "id": "ual1-rm:dance-loop",
+          "name": "Dance_Loop",
+          "normalizedName": "dance loop",
+          "tags": [
+            "gesture"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 24.0,
+          "durationFrames": 24.0,
+          "durationSeconds": 0.8
+        },
+        {
+          "id": "ual1-rm:death01",
+          "name": "Death01",
+          "normalizedName": "death01",
+          "tags": [
+            "reaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 57.6,
+          "durationFrames": 57.6,
+          "durationSeconds": 1.92
+        },
+        {
+          "id": "ual1-rm:driving-loop",
+          "name": "Driving_Loop",
+          "normalizedName": "driving loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1-rm:fixing-kneeling",
+          "name": "Fixing_Kneeling",
+          "normalizedName": "fixing kneeling",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 124.8,
+          "durationFrames": 124.8,
+          "durationSeconds": 4.16
+        },
+        {
+          "id": "ual1-rm:hit-chest",
+          "name": "Hit_Chest",
+          "normalizedName": "hit chest",
+          "tags": [
+            "reaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 8.0,
+          "durationFrames": 8.0,
+          "durationSeconds": 0.267
+        },
+        {
+          "id": "ual1-rm:hit-head",
+          "name": "Hit_Head",
+          "normalizedName": "hit head",
+          "tags": [
+            "reaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 10.4,
+          "durationFrames": 10.4,
+          "durationSeconds": 0.347
+        },
+        {
+          "id": "ual1-rm:idle-loop",
+          "name": "Idle_Loop",
+          "normalizedName": "idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual1-rm:idle-talking-loop",
+          "name": "Idle_Talking_Loop",
+          "normalizedName": "idle talking loop",
+          "tags": [
+            "idle",
+            "gesture"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 70.4,
+          "durationFrames": 70.4,
+          "durationSeconds": 2.347
+        },
+        {
+          "id": "ual1-rm:idle-torch-loop",
+          "name": "Idle_Torch_Loop",
+          "normalizedName": "idle torch loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 30.4,
+          "durationFrames": 30.4,
+          "durationSeconds": 1.013
+        },
+        {
+          "id": "ual1-rm:interact",
+          "name": "Interact",
+          "normalizedName": "interact",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual1-rm:jog-fwd-loop",
+          "name": "Jog_Fwd_Loop",
+          "normalizedName": "jog fwd loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 22.4,
+          "durationFrames": 22.4,
+          "durationSeconds": 0.747
+        },
+        {
+          "id": "ual1-rm:jump-land",
+          "name": "Jump_Land",
+          "normalizedName": "jump land",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 30.4,
+          "durationFrames": 30.4,
+          "durationSeconds": 1.013
+        },
+        {
+          "id": "ual1-rm:jump-loop",
+          "name": "Jump_Loop",
+          "normalizedName": "jump loop",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual1-rm:jump-start",
+          "name": "Jump_Start",
+          "normalizedName": "jump start",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual1-rm:pick-up-table",
+          "name": "PickUp_Table",
+          "normalizedName": "pick up table",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.0,
+          "durationFrames": 20.0,
+          "durationSeconds": 0.667
+        },
+        {
+          "id": "ual1-rm:pistol-aim-down",
+          "name": "Pistol_Aim_Down",
+          "normalizedName": "pistol aim down",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 4.0,
+          "durationFrames": 4.0,
+          "durationSeconds": 0.133
+        },
+        {
+          "id": "ual1-rm:pistol-aim-neutral",
+          "name": "Pistol_Aim_Neutral",
+          "normalizedName": "pistol aim neutral",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 4.0,
+          "durationFrames": 4.0,
+          "durationSeconds": 0.133
+        },
+        {
+          "id": "ual1-rm:pistol-aim-up",
+          "name": "Pistol_Aim_Up",
+          "normalizedName": "pistol aim up",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 4.0,
+          "durationFrames": 4.0,
+          "durationSeconds": 0.133
+        },
+        {
+          "id": "ual1-rm:pistol-idle-loop",
+          "name": "Pistol_Idle_Loop",
+          "normalizedName": "pistol idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1-rm:pistol-reload",
+          "name": "Pistol_Reload",
+          "normalizedName": "pistol reload",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1-rm:pistol-shoot",
+          "name": "Pistol_Shoot",
+          "normalizedName": "pistol shoot",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 15.2,
+          "durationFrames": 15.2,
+          "durationSeconds": 0.507
+        },
+        {
+          "id": "ual1-rm:punch-cross",
+          "name": "Punch_Cross",
+          "normalizedName": "punch cross",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 24.0,
+          "durationFrames": 24.0,
+          "durationSeconds": 0.8
+        },
+        {
+          "id": "ual1-rm:punch-jab",
+          "name": "Punch_Jab",
+          "normalizedName": "punch jab",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.8,
+          "durationFrames": 20.8,
+          "durationSeconds": 0.693
+        },
+        {
+          "id": "ual1-rm:push-loop",
+          "name": "Push_Loop",
+          "normalizedName": "push loop",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 64.0,
+          "durationFrames": 64.0,
+          "durationSeconds": 2.133
+        },
+        {
+          "id": "ual1-rm:roll",
+          "name": "Roll",
+          "normalizedName": "roll",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 35.2,
+          "durationFrames": 35.2,
+          "durationSeconds": 1.173
+        },
+        {
+          "id": "ual1-rm:sitting-enter",
+          "name": "Sitting_Enter",
+          "normalizedName": "sitting enter",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 31.2,
+          "durationFrames": 31.2,
+          "durationSeconds": 1.04
+        },
+        {
+          "id": "ual1-rm:sitting-exit",
+          "name": "Sitting_Exit",
+          "normalizedName": "sitting exit",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 24.8,
+          "durationFrames": 24.8,
+          "durationSeconds": 0.827
+        },
+        {
+          "id": "ual1-rm:sitting-idle-loop",
+          "name": "Sitting_Idle_Loop",
+          "normalizedName": "sitting idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1-rm:sitting-talking-loop",
+          "name": "Sitting_Talking_Loop",
+          "normalizedName": "sitting talking loop",
+          "tags": [
+            "gesture"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 70.4,
+          "durationFrames": 70.4,
+          "durationSeconds": 2.347
+        },
+        {
+          "id": "ual1-rm:spell-simple-enter",
+          "name": "Spell_Simple_Enter",
+          "normalizedName": "spell simple enter",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 12.8,
+          "durationFrames": 12.8,
+          "durationSeconds": 0.427
+        },
+        {
+          "id": "ual1-rm:spell-simple-exit",
+          "name": "Spell_Simple_Exit",
+          "normalizedName": "spell simple exit",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 10.4,
+          "durationFrames": 10.4,
+          "durationSeconds": 0.347
+        },
+        {
+          "id": "ual1-rm:spell-simple-idle-loop",
+          "name": "Spell_Simple_Idle_Loop",
+          "normalizedName": "spell simple idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 50.4,
+          "durationFrames": 50.4,
+          "durationSeconds": 1.68
+        },
+        {
+          "id": "ual1-rm:spell-simple-shoot",
+          "name": "Spell_Simple_Shoot",
+          "normalizedName": "spell simple shoot",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 12.0,
+          "durationFrames": 12.0,
+          "durationSeconds": 0.4
+        },
+        {
+          "id": "ual1-rm:sprint-loop",
+          "name": "Sprint_Loop",
+          "normalizedName": "sprint loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 16.0,
+          "durationFrames": 16.0,
+          "durationSeconds": 0.533
+        },
+        {
+          "id": "ual1-rm:swim-fwd-loop",
+          "name": "Swim_Fwd_Loop",
+          "normalizedName": "swim fwd loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual1-rm:swim-idle-loop",
+          "name": "Swim_Idle_Loop",
+          "normalizedName": "swim idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 80.0,
+          "durationFrames": 80.0,
+          "durationSeconds": 2.667
+        },
+        {
+          "id": "ual1-rm:sword-attack",
+          "name": "Sword_Attack",
+          "normalizedName": "sword attack",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 36.8,
+          "durationFrames": 36.8,
+          "durationSeconds": 1.227
+        },
+        {
+          "id": "ual1-rm:sword-idle",
+          "name": "Sword_Idle",
+          "normalizedName": "sword idle",
+          "tags": [
+            "idle",
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 40.0,
+          "durationFrames": 40.0,
+          "durationSeconds": 1.333
+        },
+        {
+          "id": "ual1-rm:walk-formal-loop",
+          "name": "Walk_Formal_Loop",
+          "normalizedName": "walk formal loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual1-rm:walk-loop",
+          "name": "Walk_Loop",
+          "normalizedName": "walk loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        }
+      ]
+    },
+    {
+      "id": "ual2",
+      "file": "assets/third_party/quaternius-ual/UAL2_Standard.glb",
+      "sha256": "8cee20ab1bc55130092447e810e26df22dd2803eccc54f52137a7d54d7ab88a8",
+      "rootMotion": false,
+      "armature": "Armature",
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ],
+      "actionCount": 43,
+      "actions": [
+        {
+          "id": "ual2:a-tpose",
+          "name": "A_TPose",
+          "normalizedName": "a tpose",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:chest-open",
+          "name": "Chest_Open",
+          "normalizedName": "chest open",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.8,
+          "durationFrames": 32.8,
+          "durationSeconds": 1.093
+        },
+        {
+          "id": "ual2:climb-up-1m",
+          "name": "ClimbUp_1m",
+          "normalizedName": "climb up 1m",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 16.0,
+          "durationFrames": 16.0,
+          "durationSeconds": 0.533
+        },
+        {
+          "id": "ual2:consume",
+          "name": "Consume",
+          "normalizedName": "consume",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual2:farm-harvest",
+          "name": "Farm_Harvest",
+          "normalizedName": "farm harvest",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:farm-plant-seed",
+          "name": "Farm_PlantSeed",
+          "normalizedName": "farm plant seed",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 66.4,
+          "durationFrames": 66.4,
+          "durationSeconds": 2.213
+        },
+        {
+          "id": "ual2:farm-watering",
+          "name": "Farm_Watering",
+          "normalizedName": "farm watering",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 91.2,
+          "durationFrames": 91.2,
+          "durationSeconds": 3.04
+        },
+        {
+          "id": "ual2:hit-knockback",
+          "name": "Hit_Knockback",
+          "normalizedName": "hit knockback",
+          "tags": [
+            "reaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.0,
+          "durationFrames": 20.0,
+          "durationSeconds": 0.667
+        },
+        {
+          "id": "ual2:idle-fold-arms-loop",
+          "name": "Idle_FoldArms_Loop",
+          "normalizedName": "idle fold arms loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:idle-lantern-loop",
+          "name": "Idle_Lantern_Loop",
+          "normalizedName": "idle lantern loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:idle-no-loop",
+          "name": "Idle_No_Loop",
+          "normalizedName": "idle no loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:idle-rail-call",
+          "name": "Idle_Rail_Call",
+          "normalizedName": "idle rail call",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:idle-rail-loop",
+          "name": "Idle_Rail_Loop",
+          "normalizedName": "idle rail loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:idle-shield-break",
+          "name": "Idle_Shield_Break",
+          "normalizedName": "idle shield break",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 25.6,
+          "durationFrames": 25.6,
+          "durationSeconds": 0.853
+        },
+        {
+          "id": "ual2:idle-shield-loop",
+          "name": "Idle_Shield_Loop",
+          "normalizedName": "idle shield loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:idle-talking-phone-loop",
+          "name": "Idle_TalkingPhone_Loop",
+          "normalizedName": "idle talking phone loop",
+          "tags": [
+            "idle",
+            "gesture"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 70.4,
+          "durationFrames": 70.4,
+          "durationSeconds": 2.347
+        },
+        {
+          "id": "ual2:lay-to-idle",
+          "name": "LayToIdle",
+          "normalizedName": "lay to idle",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 36.8,
+          "durationFrames": 36.8,
+          "durationSeconds": 1.227
+        },
+        {
+          "id": "ual2:melee-hook",
+          "name": "Melee_Hook",
+          "normalizedName": "melee hook",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 11.2,
+          "durationFrames": 11.2,
+          "durationSeconds": 0.373
+        },
+        {
+          "id": "ual2:melee-hook-rec",
+          "name": "Melee_Hook_Rec",
+          "normalizedName": "melee hook rec",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 14.4,
+          "durationFrames": 14.4,
+          "durationSeconds": 0.48
+        },
+        {
+          "id": "ual2:ninja-jump-idle-loop",
+          "name": "NinjaJump_Idle_Loop",
+          "normalizedName": "ninja jump idle loop",
+          "tags": [
+            "idle",
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual2:ninja-jump-land",
+          "name": "NinjaJump_Land",
+          "normalizedName": "ninja jump land",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 30.4,
+          "durationFrames": 30.4,
+          "durationSeconds": 1.013
+        },
+        {
+          "id": "ual2:ninja-jump-start",
+          "name": "NinjaJump_Start",
+          "normalizedName": "ninja jump start",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 23.2,
+          "durationFrames": 23.2,
+          "durationSeconds": 0.773
+        },
+        {
+          "id": "ual2:overhand-throw",
+          "name": "OverhandThrow",
+          "normalizedName": "overhand throw",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual2:shield-dash",
+          "name": "Shield_Dash",
+          "normalizedName": "shield dash",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 26.4,
+          "durationFrames": 26.4,
+          "durationSeconds": 0.88
+        },
+        {
+          "id": "ual2:shield-one-shot",
+          "name": "Shield_OneShot",
+          "normalizedName": "shield one shot",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.0,
+          "durationFrames": 20.0,
+          "durationSeconds": 0.667
+        },
+        {
+          "id": "ual2:slide-exit",
+          "name": "Slide_Exit",
+          "normalizedName": "slide exit",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 12.0,
+          "durationFrames": 12.0,
+          "durationSeconds": 0.4
+        },
+        {
+          "id": "ual2:slide-loop",
+          "name": "Slide_Loop",
+          "normalizedName": "slide loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual2:slide-start",
+          "name": "Slide_Start",
+          "normalizedName": "slide start",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.0,
+          "durationFrames": 20.0,
+          "durationSeconds": 0.667
+        },
+        {
+          "id": "ual2:sword-block",
+          "name": "Sword_Block",
+          "normalizedName": "sword block",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 29.6,
+          "durationFrames": 29.6,
+          "durationSeconds": 0.987
+        },
+        {
+          "id": "ual2:sword-dash",
+          "name": "Sword_Dash",
+          "normalizedName": "sword dash",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 37.6,
+          "durationFrames": 37.6,
+          "durationSeconds": 1.253
+        },
+        {
+          "id": "ual2:sword-heavy-combo",
+          "name": "Sword_Heavy_Combo",
+          "normalizedName": "sword heavy combo",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 104.0,
+          "durationFrames": 104.0,
+          "durationSeconds": 3.467
+        },
+        {
+          "id": "ual2:sword-regular-a",
+          "name": "Sword_Regular_A",
+          "normalizedName": "sword regular a",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 10.4,
+          "durationFrames": 10.4,
+          "durationSeconds": 0.347
+        },
+        {
+          "id": "ual2:sword-regular-a-rec",
+          "name": "Sword_Regular_A_Rec",
+          "normalizedName": "sword regular a rec",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 23.2,
+          "durationFrames": 23.2,
+          "durationSeconds": 0.773
+        },
+        {
+          "id": "ual2:sword-regular-b",
+          "name": "Sword_Regular_B",
+          "normalizedName": "sword regular b",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 12.8,
+          "durationFrames": 12.8,
+          "durationSeconds": 0.427
+        },
+        {
+          "id": "ual2:sword-regular-b-rec",
+          "name": "Sword_Regular_B_Rec",
+          "normalizedName": "sword regular b rec",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 24.8,
+          "durationFrames": 24.8,
+          "durationSeconds": 0.827
+        },
+        {
+          "id": "ual2:sword-regular-c",
+          "name": "Sword_Regular_C",
+          "normalizedName": "sword regular c",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual2:sword-regular-combo",
+          "name": "Sword_Regular_Combo",
+          "normalizedName": "sword regular combo",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 72.0,
+          "durationFrames": 72.0,
+          "durationSeconds": 2.4
+        },
+        {
+          "id": "ual2:tree-chopping-loop",
+          "name": "TreeChopping_Loop",
+          "normalizedName": "tree chopping loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 23.2,
+          "durationFrames": 23.2,
+          "durationSeconds": 0.773
+        },
+        {
+          "id": "ual2:walk-carry-loop",
+          "name": "Walk_Carry_Loop",
+          "normalizedName": "walk carry loop",
+          "tags": [
+            "locomotion",
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual2:yes",
+          "name": "Yes",
+          "normalizedName": "yes",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2:zombie-idle-loop",
+          "name": "Zombie_Idle_Loop",
+          "normalizedName": "zombie idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual2:zombie-scratch",
+          "name": "Zombie_Scratch",
+          "normalizedName": "zombie scratch",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 43.2,
+          "durationFrames": 43.2,
+          "durationSeconds": 1.44
+        },
+        {
+          "id": "ual2:zombie-walk-fwd-loop",
+          "name": "Zombie_Walk_Fwd_Loop",
+          "normalizedName": "zombie walk fwd loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        }
+      ]
+    },
+    {
+      "id": "ual2-rm",
+      "file": "assets/third_party/quaternius-ual/UAL2_Standard_RM.glb",
+      "sha256": "814eee878f82934992d3ea746c539df25e981487109c591f5efbb8dd03286f99",
+      "rootMotion": true,
+      "armature": "Armature",
+      "bones": [
+        "root",
+        "pelvis",
+        "spine_01",
+        "spine_02",
+        "spine_03",
+        "neck_01",
+        "Head",
+        "clavicle_l",
+        "upperarm_l",
+        "lowerarm_l",
+        "hand_l",
+        "index_01_l",
+        "index_02_l",
+        "index_03_l",
+        "index_04_leaf_l",
+        "middle_01_l",
+        "middle_02_l",
+        "middle_03_l",
+        "middle_04_leaf_l",
+        "pinky_01_l",
+        "pinky_02_l",
+        "pinky_03_l",
+        "pinky_04_leaf_l",
+        "ring_01_l",
+        "ring_02_l",
+        "ring_03_l",
+        "ring_04_leaf_l",
+        "thumb_01_l",
+        "thumb_02_l",
+        "thumb_03_l",
+        "thumb_04_leaf_l",
+        "clavicle_r",
+        "upperarm_r",
+        "lowerarm_r",
+        "hand_r",
+        "index_01_r",
+        "index_02_r",
+        "index_03_r",
+        "index_04_leaf_r",
+        "middle_01_r",
+        "middle_02_r",
+        "middle_03_r",
+        "middle_04_leaf_r",
+        "pinky_01_r",
+        "pinky_02_r",
+        "pinky_03_r",
+        "pinky_04_leaf_r",
+        "ring_01_r",
+        "ring_02_r",
+        "ring_03_r",
+        "ring_04_leaf_r",
+        "thumb_01_r",
+        "thumb_02_r",
+        "thumb_03_r",
+        "thumb_04_leaf_r",
+        "thigh_l",
+        "calf_l",
+        "foot_l",
+        "ball_l",
+        "ball_leaf_l",
+        "thigh_r",
+        "calf_r",
+        "foot_r",
+        "ball_r",
+        "ball_leaf_r"
+      ],
+      "actionCount": 43,
+      "actions": [
+        {
+          "id": "ual2-rm:a-tpose",
+          "name": "A_TPose",
+          "normalizedName": "a tpose",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:chest-open",
+          "name": "Chest_Open",
+          "normalizedName": "chest open",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.8,
+          "durationFrames": 32.8,
+          "durationSeconds": 1.093
+        },
+        {
+          "id": "ual2-rm:climb-up-1m",
+          "name": "ClimbUp_1m",
+          "normalizedName": "climb up 1m",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 16.0,
+          "durationFrames": 16.0,
+          "durationSeconds": 0.533
+        },
+        {
+          "id": "ual2-rm:consume",
+          "name": "Consume",
+          "normalizedName": "consume",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual2-rm:farm-harvest",
+          "name": "Farm_Harvest",
+          "normalizedName": "farm harvest",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:farm-plant-seed",
+          "name": "Farm_PlantSeed",
+          "normalizedName": "farm plant seed",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 66.4,
+          "durationFrames": 66.4,
+          "durationSeconds": 2.213
+        },
+        {
+          "id": "ual2-rm:farm-watering",
+          "name": "Farm_Watering",
+          "normalizedName": "farm watering",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 91.2,
+          "durationFrames": 91.2,
+          "durationSeconds": 3.04
+        },
+        {
+          "id": "ual2-rm:hit-knockback",
+          "name": "Hit_Knockback",
+          "normalizedName": "hit knockback",
+          "tags": [
+            "reaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.0,
+          "durationFrames": 20.0,
+          "durationSeconds": 0.667
+        },
+        {
+          "id": "ual2-rm:idle-fold-arms-loop",
+          "name": "Idle_FoldArms_Loop",
+          "normalizedName": "idle fold arms loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:idle-lantern-loop",
+          "name": "Idle_Lantern_Loop",
+          "normalizedName": "idle lantern loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:idle-no-loop",
+          "name": "Idle_No_Loop",
+          "normalizedName": "idle no loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:idle-rail-call",
+          "name": "Idle_Rail_Call",
+          "normalizedName": "idle rail call",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:idle-rail-loop",
+          "name": "Idle_Rail_Loop",
+          "normalizedName": "idle rail loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:idle-shield-break",
+          "name": "Idle_Shield_Break",
+          "normalizedName": "idle shield break",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 25.6,
+          "durationFrames": 25.6,
+          "durationSeconds": 0.853
+        },
+        {
+          "id": "ual2-rm:idle-shield-loop",
+          "name": "Idle_Shield_Loop",
+          "normalizedName": "idle shield loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:idle-talking-phone-loop",
+          "name": "Idle_TalkingPhone_Loop",
+          "normalizedName": "idle talking phone loop",
+          "tags": [
+            "idle",
+            "gesture"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 70.4,
+          "durationFrames": 70.4,
+          "durationSeconds": 2.347
+        },
+        {
+          "id": "ual2-rm:lay-to-idle",
+          "name": "LayToIdle",
+          "normalizedName": "lay to idle",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 36.8,
+          "durationFrames": 36.8,
+          "durationSeconds": 1.227
+        },
+        {
+          "id": "ual2-rm:melee-hook",
+          "name": "Melee_Hook",
+          "normalizedName": "melee hook",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 11.2,
+          "durationFrames": 11.2,
+          "durationSeconds": 0.373
+        },
+        {
+          "id": "ual2-rm:melee-hook-rec",
+          "name": "Melee_Hook_Rec",
+          "normalizedName": "melee hook rec",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 14.4,
+          "durationFrames": 14.4,
+          "durationSeconds": 0.48
+        },
+        {
+          "id": "ual2-rm:ninja-jump-idle-loop",
+          "name": "NinjaJump_Idle_Loop",
+          "normalizedName": "ninja jump idle loop",
+          "tags": [
+            "idle",
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual2-rm:ninja-jump-land",
+          "name": "NinjaJump_Land",
+          "normalizedName": "ninja jump land",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 30.4,
+          "durationFrames": 30.4,
+          "durationSeconds": 1.013
+        },
+        {
+          "id": "ual2-rm:ninja-jump-start",
+          "name": "NinjaJump_Start",
+          "normalizedName": "ninja jump start",
+          "tags": [
+            "traversal"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 23.2,
+          "durationFrames": 23.2,
+          "durationSeconds": 0.773
+        },
+        {
+          "id": "ual2-rm:overhand-throw",
+          "name": "OverhandThrow",
+          "normalizedName": "overhand throw",
+          "tags": [
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual2-rm:shield-dash",
+          "name": "Shield_Dash",
+          "normalizedName": "shield dash",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 26.4,
+          "durationFrames": 26.4,
+          "durationSeconds": 0.88
+        },
+        {
+          "id": "ual2-rm:shield-one-shot",
+          "name": "Shield_OneShot",
+          "normalizedName": "shield one shot",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.0,
+          "durationFrames": 20.0,
+          "durationSeconds": 0.667
+        },
+        {
+          "id": "ual2-rm:slide-exit",
+          "name": "Slide_Exit",
+          "normalizedName": "slide exit",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 12.0,
+          "durationFrames": 12.0,
+          "durationSeconds": 0.4
+        },
+        {
+          "id": "ual2-rm:slide-loop",
+          "name": "Slide_Loop",
+          "normalizedName": "slide loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual2-rm:slide-start",
+          "name": "Slide_Start",
+          "normalizedName": "slide start",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 20.0,
+          "durationFrames": 20.0,
+          "durationSeconds": 0.667
+        },
+        {
+          "id": "ual2-rm:sword-block",
+          "name": "Sword_Block",
+          "normalizedName": "sword block",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 29.6,
+          "durationFrames": 29.6,
+          "durationSeconds": 0.987
+        },
+        {
+          "id": "ual2-rm:sword-dash",
+          "name": "Sword_Dash",
+          "normalizedName": "sword dash",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 37.6,
+          "durationFrames": 37.6,
+          "durationSeconds": 1.253
+        },
+        {
+          "id": "ual2-rm:sword-heavy-combo",
+          "name": "Sword_Heavy_Combo",
+          "normalizedName": "sword heavy combo",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 104.0,
+          "durationFrames": 104.0,
+          "durationSeconds": 3.467
+        },
+        {
+          "id": "ual2-rm:sword-regular-a",
+          "name": "Sword_Regular_A",
+          "normalizedName": "sword regular a",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 10.4,
+          "durationFrames": 10.4,
+          "durationSeconds": 0.347
+        },
+        {
+          "id": "ual2-rm:sword-regular-a-rec",
+          "name": "Sword_Regular_A_Rec",
+          "normalizedName": "sword regular a rec",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 23.2,
+          "durationFrames": 23.2,
+          "durationSeconds": 0.773
+        },
+        {
+          "id": "ual2-rm:sword-regular-b",
+          "name": "Sword_Regular_B",
+          "normalizedName": "sword regular b",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 12.8,
+          "durationFrames": 12.8,
+          "durationSeconds": 0.427
+        },
+        {
+          "id": "ual2-rm:sword-regular-b-rec",
+          "name": "Sword_Regular_B_Rec",
+          "normalizedName": "sword regular b rec",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 24.8,
+          "durationFrames": 24.8,
+          "durationSeconds": 0.827
+        },
+        {
+          "id": "ual2-rm:sword-regular-c",
+          "name": "Sword_Regular_C",
+          "normalizedName": "sword regular c",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual2-rm:sword-regular-combo",
+          "name": "Sword_Regular_Combo",
+          "normalizedName": "sword regular combo",
+          "tags": [
+            "combat"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 72.0,
+          "durationFrames": 72.0,
+          "durationSeconds": 2.4
+        },
+        {
+          "id": "ual2-rm:tree-chopping-loop",
+          "name": "TreeChopping_Loop",
+          "normalizedName": "tree chopping loop",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 23.2,
+          "durationFrames": 23.2,
+          "durationSeconds": 0.773
+        },
+        {
+          "id": "ual2-rm:walk-carry-loop",
+          "name": "Walk_Carry_Loop",
+          "normalizedName": "walk carry loop",
+          "tags": [
+            "locomotion",
+            "interaction"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 48.0,
+          "durationFrames": 48.0,
+          "durationSeconds": 1.6
+        },
+        {
+          "id": "ual2-rm:yes",
+          "name": "Yes",
+          "normalizedName": "yes",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 60.0,
+          "durationFrames": 60.0,
+          "durationSeconds": 2.0
+        },
+        {
+          "id": "ual2-rm:zombie-idle-loop",
+          "name": "Zombie_Idle_Loop",
+          "normalizedName": "zombie idle loop",
+          "tags": [
+            "idle"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        },
+        {
+          "id": "ual2-rm:zombie-scratch",
+          "name": "Zombie_Scratch",
+          "normalizedName": "zombie scratch",
+          "tags": [
+            "other"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 43.2,
+          "durationFrames": 43.2,
+          "durationSeconds": 1.44
+        },
+        {
+          "id": "ual2-rm:zombie-walk-fwd-loop",
+          "name": "Zombie_Walk_Fwd_Loop",
+          "normalizedName": "zombie walk fwd loop",
+          "tags": [
+            "locomotion"
+          ],
+          "frameStart": 0.0,
+          "frameEnd": 32.0,
+          "durationFrames": 32.0,
+          "durationSeconds": 1.067
+        }
+      ]
+    }
+  ]
+}

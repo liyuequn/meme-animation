@@ -12,6 +12,8 @@ AI 驱动骨骼角色完成连续表演的动态漫纵向切片。当前版本�
 
 仓库同时包含一条 Blender 离线验证链路：结构化 Motion Plan 驱动一个 CC0 骨骼角色，将 `Walking`、`Roll_sword`、`Run_swordAttack`、`swordAttackJump`、`Death` 等外部制作的动作片段组合成连续表演。它用来验证真正的骨骼执行路线，不以浏览器低模动画代替最终效果。
 
+动作底座已接入 Quaternius Universal Animation Library 1/2 的 CC0 标准版，同时保留 in-place 与 root-motion 数据。动作元数据不靠人工抄表，而是由 Blender 扫描原始 GLB 自动生成可检索目录；这些素材只负责动作能力，不决定最终人物画风。
+
 本地语义适配器是无模型依赖的可测 fallback，不冒充最终 AI。`MotionPlan` 是模型与执行器之间的稳定契约，后续可接任意 LLM Director；最终生产渲染层计划迁移到 Unreal Engine 或 Blender。
 
 ## 运行
@@ -34,6 +36,16 @@ npm run dev
 
 脚本读取 `blender/motion-plan.validation.json`，输出 `.blend`、关键帧图片或 MP4 到 `exports/blender-validation/`。动作计划只描述动作片段、目标时段、Root Motion 和朝向，执行器负责骨骼动作、过渡和武器挂接。
 
+### 动作库目录
+
+```bash
+./scripts/build_motion_catalog.sh
+python3 scripts/search_motion_library.py "转身闪避"
+python3 scripts/search_motion_library.py "持剑攻击"
+```
+
+目录位于 `blender/motion-library.catalog.json`，包含动作名、分类、时长、骨架、文件校验和与 root-motion 标记。`blender/motion-bindings.json` 将验收动作语义绑定到候选片段；Director 生成的每个节拍已携带这些候选，而不是只输出无法执行的标签。
+
 [查看 10 秒验证视频](docs/blender-motion-validation.mp4)
 
 ![Blender 骨骼动作验证分镜](docs/blender-motion-validation-contact-sheet.png)
@@ -50,4 +62,5 @@ npm run dev
 - 浏览器角色仍是程序化低模验证资产，不代表最终美术质量；Blender 验证使用真实骨骼资产和外部动作片段。
 - 当前 Director 使用本地确定性语义适配器；真实模型接入仍待实现。
 - Blender 样片目前验证“计划选择并组合动作片段”，尚未完成异骨架重定向、脚底锁定、手部 IK 和精确双人接触；这些仍是进入生产级流畅度的下一关。
+- Quaternius 角色/人偶仅用于动作和重定向测试，不作为武侠样片的最终人物；验收人物仍需独立确定符合中国古风审美、许可可用的高质量绑定资产。
 - 浏览器运行时用于快速验证和导演台预览，不作为最终离线动画渲染器。

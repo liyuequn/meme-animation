@@ -1,3 +1,5 @@
+import motionBindings from "../blender/motion-bindings.json";
+
 export type ActorId = "swordsman" | "guardian";
 
 export type MotionKind =
@@ -9,6 +11,15 @@ export type MotionKind =
   | "clash"
   | "recoil"
   | "recover";
+
+export interface MotionSelection {
+  query: string;
+  coverage: "exact" | "partial" | "missing";
+  candidates: Array<{ clipId: string; role: string }>;
+  note?: string;
+}
+
+const executableMotionBindings = motionBindings.bindings as Record<MotionKind, MotionSelection>;
 
 export interface MotionConstraint {
   rootMotion?: boolean;
@@ -29,6 +40,7 @@ export interface MotionBeat {
   intensity: number;
   dialogue?: string;
   constraints: MotionConstraint;
+  motion: MotionSelection;
 }
 
 export interface MotionPlan {
@@ -156,6 +168,7 @@ export const compileMotionPlan = (prompt: string): MotionPlan => {
       duration: template.duration,
       intensity: template.intensity,
       constraints: { ...template.constraints },
+      motion: executableMotionBindings[template.kind],
       ...(template.kind === "speak" ? { dialogue: dialogueFrom(cleanPrompt) } : {})
     };
     cursor += template.duration;
