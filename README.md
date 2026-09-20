@@ -56,9 +56,9 @@ python3 scripts/search_motion_library.py "持剑攻击"
 
 ### Blender MCP 建模实验
 
-本机已接入 Blender Lab 官方实验版 MCP。`blender/build_wuxia_character_prototype.py` 通过 MCP 在当前 Blender 会话中生成古风角色，并加入与 UAL 对齐的 21 根核心人形骨骼；`blender/animate_wuxia_character_prototype.py` 再通过 MCP 把 `Sword_Regular_Combo` 迁移到自建角色。
+本机已接入 Blender Lab 官方实验版 MCP。`blender/build_wuxia_character_prototype.py` 通过 MCP 生成白发、红瞳、黑衣红饰的古风剑客，并加入与 UAL 对齐的 21 根核心人形骨骼；`blender/animate_wuxia_character_prototype.py` 再通过 MCP 把 `Sword_Regular_Combo` 迁移到自建角色。
 
-验证结果为 91 帧、30 FPS 的连续关节剑术动作：头、躯干、双臂、双腿和右手佩剑分别由骨骼驱动，不是整个人物平移。当前仍是刚性分件绑定，衣摆没有蒙皮/布料骨骼，不能代表最终角色形变质量。
+验证结果为 73 帧、30 FPS 的连续关节剑术动作：头、躯干、双臂、双腿和右手佩剑分别由骨骼驱动，不是整个人物平移。当前仍是刚性分件绑定，衣摆没有蒙皮/布料骨骼，不能代表最终角色形变质量。
 
 ![Blender MCP 古风角色原型](docs/wuxia-character-mcp-prototype.png)
 

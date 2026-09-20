@@ -154,11 +154,14 @@ def bone_parent(rig, object_names, bone_name):
 
 clear_scene()
 
-skin = material("skin warm", (0.72, 0.48, 0.34), 0.74)
-ink = material("hair ink", (0.012, 0.016, 0.026), 0.35)
-robe = material("robe midnight", (0.025, 0.075, 0.12), 0.62)
-robe_light = material("robe lapel", (0.19, 0.34, 0.40), 0.58)
-lining = material("robe lining", (0.38, 0.055, 0.045), 0.58)
+skin = material("pale skin", (0.84, 0.70, 0.62), 0.72)
+ink = material("ink black", (0.008, 0.009, 0.013), 0.42)
+hair = material("silver white hair", (0.72, 0.76, 0.80), 0.3, 0.08)
+robe = material("black outer robe", (0.012, 0.013, 0.018), 0.66)
+robe_light = material("charcoal inner robe", (0.055, 0.057, 0.066), 0.6)
+lining = material("blood red accent", (0.42, 0.018, 0.022), 0.52)
+wrap = material("cloth wraps", (0.018, 0.019, 0.025), 0.82)
+red_eye = material("red iris", (0.64, 0.018, 0.015), 0.3)
 gold = material("aged brass", (0.42, 0.24, 0.07), 0.28, 0.78)
 steel = material("blade steel", (0.42, 0.48, 0.53), 0.2, 0.92)
 white = material("eye white", (0.8, 0.78, 0.72), 0.5)
@@ -168,22 +171,48 @@ bpy.context.scene.collection.children.link(actor)
 
 created = []
 created += [
-    uv("Head", (0, 0, 3.36), (0.39, 0.34, 0.48), skin),
+    uv("Head", (0, 0, 3.38), (0.355, 0.31, 0.455), skin),
     uv("Nose", (0, -0.34, 3.34), (0.055, 0.06, 0.09), skin, 24, 12),
-    uv("HairCap", (0, 0.035, 3.52), (0.415, 0.37, 0.40), ink),
-    uv("TopKnot", (0, 0.05, 4.02), (0.20, 0.18, 0.24), ink),
-    uv("HairCrown", (0, 0.04, 3.88), (0.26, 0.22, 0.18), ink),
+    uv("HairCap", (0, 0.035, 3.55), (0.39, 0.35, 0.39), hair),
+    uv("TopKnot", (0, 0.06, 4.01), (0.16, 0.15, 0.18), hair),
+    uv("HairCrown", (0, 0.04, 3.88), (0.25, 0.21, 0.17), hair),
 ]
 
 for side in (-1, 1):
-    created.append(uv(f"Eye.{side}", (0.145 * side, -0.326, 3.43), (0.092, 0.019, 0.035), white, 24, 12))
-    created.append(uv(f"Pupil.{side}", (0.145 * side, -0.348, 3.43), (0.026, 0.013, 0.026), ink, 20, 10))
+    created.append(uv(f"Eye.{side}", (0.13 * side, -0.306, 3.44), (0.078, 0.018, 0.026), white, 24, 12))
+    created.append(uv(f"Pupil.{side}", (0.13 * side, -0.326, 3.44), (0.025, 0.012, 0.021), red_eye, 20, 10))
     created.append(cylinder_between(f"Brow.{side}", (0.07 * side, -0.365, 3.55), (0.22 * side, -0.35, 3.57), 0.012, ink, 16))
     curve_lock(
         f"TempleLock.{side}",
         [(0.27 * side, -0.02, 3.72), (0.35 * side, -0.09, 3.35), (0.30 * side, -0.02, 2.88)],
         0.055,
-        ink,
+        hair,
+    )
+
+# Long, separated locks preserve the reference silhouette in profile and motion.
+for index, (x, y, z) in enumerate([
+    (-0.22, 0.20, 1.55), (0.22, 0.22, 1.50), (-0.42, 0.12, 1.75),
+    (0.42, 0.14, 1.70), (-0.58, 0.04, 2.08), (0.58, 0.06, 2.03),
+]):
+    curve_lock(
+        f"LongHair.{index}",
+        [(x * 0.35, 0.18, 3.77), (x * 0.72, 0.27, 3.05), (x, y, z)],
+        0.085 if index < 4 else 0.065,
+        hair,
+    )
+for index, (x, z) in enumerate([(-0.31, 3.54), (-0.16, 3.40), (0.16, 3.38), (0.31, 3.53)]):
+    curve_lock(
+        f"HairSpike.{index}",
+        [(x * 0.35, -0.27, 3.84), (x, -0.34, z), (x * 1.2, -0.29, z - 0.22)],
+        0.045,
+        hair,
+    )
+for side in (-1, 1):
+    curve_lock(
+        f"HeadRibbon.{side}",
+        [(0.10 * side, 0.18, 3.91), (0.36 * side, 0.28, 3.50), (0.58 * side, 0.20, 3.12)],
+        0.035,
+        lining,
     )
 
 # Neck and layered torso.
@@ -200,6 +229,8 @@ created.append(cylinder_between("Mouth", (-0.105, -0.354, 3.19), (0.105, -0.354,
 created.append(cube("Belt", (0, -0.02, 1.72), (0.72, 0.54, 0.11), lining, 0.05))
 created.append(cube("BeltTrim", (0, -0.575, 1.72), (0.48, 0.035, 0.055), gold, 0.025))
 created.append(uv("BeltClasp", (0, -0.625, 1.72), (0.14, 0.045, 0.12), gold, 24, 12))
+created.append(cube("WaistStreamer.L", (-0.27, -0.60, 1.08), (0.075, 0.025, 0.67), lining, 0.025, (0, math.radians(-5), math.radians(-4))))
+created.append(cube("WaistStreamer.R", (0.34, -0.59, 1.15), (0.065, 0.025, 0.58), lining, 0.025, (0, math.radians(7), math.radians(5))))
 
 # Wide sleeves around visible arms, hands exposed.
 for side in (-1, 1):
@@ -208,13 +239,13 @@ for side in (-1, 1):
     wrist = (1.22 * side, -0.12, 1.62)
     created.append(cylinder_between(f"UpperSleeve.{side}", shoulder, elbow, 0.31, robe))
     created.append(cylinder_between(f"LowerSleeve.{side}", elbow, wrist, 0.38, robe))
-    created.append(cylinder_between(f"LiningCuff.{side}", (1.15 * side, -0.10, 1.74), wrist, 0.405, lining))
+    created.append(cylinder_between(f"LiningCuff.{side}", (1.15 * side, -0.10, 1.74), wrist, 0.405, wrap))
     created.append(uv(f"Hand.{side}", (1.28 * side, -0.14, 1.52), (0.14, 0.10, 0.19), skin, 28, 14))
 
 # Shoes and lower robe slit.
 created.append(cube("FrontPanel", (0, -0.60, 0.93), (0.36, 0.055, 0.72), robe_light, 0.055))
-created.append(cube("Shoe.L", (-0.32, -0.10, 0.12), (0.24, 0.42, 0.12), ink, 0.09))
-created.append(cube("Shoe.R", (0.32, -0.10, 0.12), (0.24, 0.42, 0.12), ink, 0.09))
+created.append(cube("Shoe.L", (-0.32, -0.10, 0.12), (0.24, 0.42, 0.12), wrap, 0.09))
+created.append(cube("Shoe.R", (0.32, -0.10, 0.12), (0.24, 0.42, 0.12), wrap, 0.09))
 
 # Jian scabbard at the waist and blade in the right hand.
 created.append(cylinder_between("Scabbard", (0.62, 0.02, 1.67), (1.34, 0.07, 0.36), 0.075, ink, 24))
@@ -224,22 +255,22 @@ created.append(cylinder_between("JianGrip", (1.25, -0.13, 1.68), (1.38, -0.14, 1
 created.append(cube("JianGuard", (1.36, -0.14, 1.42), (0.20, 0.055, 0.045), gold, 0.025, (0, 0, math.radians(20))))
 
 # Hair ribbon and back locks.
-created.append(cube("Hairpin", (0, 0.04, 3.94), (0.46, 0.035, 0.035), gold, 0.025))
+created.append(cube("Hairpin", (0, 0.04, 3.94), (0.46, 0.035, 0.035), lining, 0.025))
 for side in (-1, 1):
     curve_lock(
         f"BackHair.{side}",
         [(0.14 * side, 0.21, 3.76), (0.24 * side, 0.34, 3.03), (0.16 * side, 0.33, 2.35)],
         0.12,
-        ink,
+        hair,
     )
 
 rig = build_standard_rig()
-bone_parent(rig, ["LowerRobe", "FrontPanel", "Belt", "BeltTrim", "BeltClasp", "Scabbard", "ScabbardGold"], "pelvis")
+bone_parent(rig, ["LowerRobe", "FrontPanel", "Belt", "BeltTrim", "BeltClasp", "WaistStreamer.L", "WaistStreamer.R", "Scabbard", "ScabbardGold"], "pelvis")
 bone_parent(rig, ["UpperRobe", "Lapel.L", "Lapel.R"], "spine_02")
 bone_parent(rig, ["Neck"], "neck_01")
 bone_parent(
     rig,
-    ["Head", "Nose", "HairCap", "TopKnot", "HairCrown", "Eye.-1", "Eye.1", "Pupil.-1", "Pupil.1", "Brow.-1", "Brow.1", "Mouth", "Hairpin", "TempleLock.-1", "TempleLock.1", "BackHair.-1", "BackHair.1"],
+    ["Head", "Nose", "HairCap", "TopKnot", "HairCrown", "Eye.-1", "Eye.1", "Pupil.-1", "Pupil.1", "Brow.-1", "Brow.1", "Mouth", "Hairpin", "TempleLock.-1", "TempleLock.1", "BackHair.-1", "BackHair.1"] + [f"LongHair.{i}" for i in range(6)] + [f"HairSpike.{i}" for i in range(4)] + ["HeadRibbon.-1", "HeadRibbon.1"],
     "Head",
 )
 for side, suffix in [(-1, "l"), (1, "r")]:
@@ -258,7 +289,7 @@ finish(bpy.context.object, "Floor", floor_mat, smooth=False)
 world = bpy.context.scene.world or bpy.data.worlds.new("World")
 bpy.context.scene.world = world
 world.use_nodes = True
-world.node_tree.nodes["Background"].inputs["Color"].default_value = (0.008, 0.012, 0.02, 1)
+world.node_tree.nodes["Background"].inputs["Color"].default_value = (0.018, 0.003, 0.004, 1)
 world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0.28
 
 for loc, energy, color, size in [
