@@ -10,6 +10,8 @@ AI 驱动骨骼角色完成连续表演的动态漫纵向切片。当前版本�
 4. 执行层处理 Root Motion、移动/目标朝向、脚底约束、手部武器挂点、视线和接触同步。
 5. 时间线可寻址、拖动和重新执行，也可导出 MP4。
 
+仓库同时包含一条 Blender 离线验证链路：结构化 Motion Plan 驱动一个 CC0 骨骼角色，将 `Walking`、`Roll_sword`、`Run_swordAttack`、`swordAttackJump`、`Death` 等外部制作的动作片段组合成连续表演。它用来验证真正的骨骼执行路线，不以浏览器低模动画代替最终效果。
+
 本地语义适配器是无模型依赖的可测 fallback，不冒充最终 AI。`MotionPlan` 是模型与执行器之间的稳定契约，后续可接任意 LLM Director；最终生产渲染层计划迁移到 Unreal Engine 或 Blender。
 
 ## 运行
@@ -21,6 +23,21 @@ npm run dev
 
 打开 `http://127.0.0.1:4173`。
 
+### Blender 骨骼动作验证
+
+需要 Blender 5.2 LTS：
+
+```bash
+./scripts/render_blender_validation.sh stills
+./scripts/render_blender_validation.sh video
+```
+
+脚本读取 `blender/motion-plan.validation.json`，输出 `.blend`、关键帧图片或 MP4 到 `exports/blender-validation/`。动作计划只描述动作片段、目标时段、Root Motion 和朝向，执行器负责骨骼动作、过渡和武器挂接。
+
+[查看 10 秒验证视频](docs/blender-motion-validation.mp4)
+
+![Blender 骨骼动作验证分镜](docs/blender-motion-validation-contact-sheet.png)
+
 ## 验收重点
 
 - 打开“显示骨骼”可检查角色确实由骨骼层级驱动。
@@ -30,7 +47,7 @@ npm run dev
 
 ## 当前边界
 
-- 当前角色是程序化低模验证资产，不代表最终美术质量。
+- 浏览器角色仍是程序化低模验证资产，不代表最终美术质量；Blender 验证使用真实骨骼资产和外部动作片段。
 - 当前 Director 使用本地确定性语义适配器；真实模型接入仍待实现。
-- 程序化动作只用于证明执行契约。生产级流畅度需要接入动作捕捉/动作生成数据、动画重定向、Motion Matching 和更完整的 IK 求解。
+- Blender 样片目前验证“计划选择并组合动作片段”，尚未完成异骨架重定向、脚底锁定、手部 IK 和精确双人接触；这些仍是进入生产级流畅度的下一关。
 - 浏览器运行时用于快速验证和导演台预览，不作为最终离线动画渲染器。

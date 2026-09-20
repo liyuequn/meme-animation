@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "fps": 24,
+  "frameEnd": 240,
+  "camera": {
+    "position": [0.0, -14.0, 4.3],
+    "target": [0.0, 0.0, 1.35],
+    "orthographicScale": 9.5
+  },
+  "actors": [
+    {
+      "id": "hero",
+      "tint": [0.12, 0.32, 0.62, 1.0],
+      "weaponHand": "Palm.R",
+      "segments": [
+        { "action": "walk", "start": 1, "end": 61, "repeat": 2.0 },
+        { "action": "idleSwordRight", "start": 61, "end": 105, "sourceStart": 1, "sourceEnd": 45 },
+        { "action": "rollSword", "start": 105, "end": 136 },
+        { "action": "runSwordAttack", "start": 136, "end": 157 },
+        { "action": "swordAttackJump", "start": 157, "end": 186 },
+        { "action": "idleSwordRight", "start": 186, "end": 240, "sourceStart": 1, "sourceEnd": 55 }
+      ],
+      "rootMotion": [
+        { "frame": 1, "position": [-4.2, 0.0, 0.0], "facingDegrees": 90 },
+        { "frame": 61, "position": [-1.7, 0.0, 0.0], "facingDegrees": 90 },
+        { "frame": 105, "position": [-1.7, 0.0, 0.0], "facingDegrees": 90 },
+        { "frame": 136, "position": [-0.2, 0.0, 0.0], "facingDegrees": 90 },
+        { "frame": 157, "position": [1.55, 0.0, 0.0], "facingDegrees": 90 },
+        { "frame": 186, "position": [1.7, 0.0, 0.0], "facingDegrees": 90 },
+        { "frame": 240, "position": [1.7, 0.0, 0.0], "facingDegrees": 90 }
+      ]
+    },
+    {
+      "id": "guard",
+      "tint": [0.52, 0.13, 0.10, 1.0],
+      "weaponHand": "Palm.L",
+      "segments": [
+        { "action": "idleSwordLeft", "start": 1, "end": 157, "repeat": 1.95 },
+        { "action": "death", "start": 157, "end": 192 }
+      ],
+      "rootMotion": [
+        { "frame": 1, "position": [3.35, 0.0, 0.0], "facingDegrees": -90 },
+        { "frame": 240, "position": [3.35, 0.0, 0.0], "facingDegrees": -90 }
+      ]
+    }
+  ],
+  "events": [
+    { "frame": 1, "type": "enter", "actor": "hero" },
+    { "frame": 61, "type": "observe", "actor": "hero" },
+    { "frame": 105, "type": "evade", "actor": "hero" },
+    { "frame": 136, "type": "attack", "actor": "hero", "target": "guard" },
+    { "frame": 157, "type": "contact", "actor": "hero", "target": "guard" },
+    { "frame": 186, "type": "recover", "actor": "hero" }
+  ]
+}
