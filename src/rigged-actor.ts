@@ -102,7 +102,8 @@ const heroPose = (kind: MotionKind, p: number, time: number): Pose => {
     x: -1.55,
     y: 0,
     z: 0.12,
-    rotationY: 0,
+    // 角色位于画面左侧，默认侧身朝向右侧的守将，而不是正对镜头。
+    rotationY: Math.PI / 2,
     weaponVisible: drawn,
     jaw: 0,
     bones: {
@@ -172,7 +173,7 @@ const heroPose = (kind: MotionKind, p: number, time: number): Pose => {
     const pull = smooth(clamp((p - 0.34) / 0.5));
     return mergePose(base, {
       weaponVisible: p > 0.3,
-      rotationY: -0.08 * pull,
+      rotationY: Math.PI / 2 - 0.08 * pull,
       bones: {
         chest: rotation(-0.08, -0.18 * pull, 0.05),
         rightUpperArm: rotation(lerp(-0.15, -1.1, reach), -0.28, lerp(-0.1, -0.72, reach)),
@@ -190,7 +191,7 @@ const heroPose = (kind: MotionKind, p: number, time: number): Pose => {
       x: -1.55 - arc * 0.72,
       y: arc * 0.09,
       z: 0.12 + arc * 0.24,
-      rotationY: -arc * 0.68,
+      rotationY: Math.PI / 2 - arc * 0.68,
       bones: {
         spine: rotation(-0.22 * arc, -0.2 * arc, -0.18 * arc),
         chest: rotation(-0.18 * arc, -0.34 * arc, -0.26 * arc),
@@ -211,7 +212,7 @@ const heroPose = (kind: MotionKind, p: number, time: number): Pose => {
     return mergePose(base, {
       x: lerp(-1.55, -0.52, charge) - settle * 0.18,
       y: Math.sin(p * Math.PI) * 0.055,
-      rotationY: -0.1 + strike * 0.25,
+      rotationY: Math.PI / 2 - 0.1 + strike * 0.25,
       bones: {
         chest: rotation(lerp(-0.18, 0.04, strike), lerp(-0.48, 0.36, strike), -0.08),
         head: rotation(-0.05, -0.25, 0),
@@ -233,7 +234,7 @@ const heroPose = (kind: MotionKind, p: number, time: number): Pose => {
     return mergePose(base, {
       x: lerp(-0.7, -1.82, hit),
       y: Math.sin(p * Math.PI) * 0.06,
-      rotationY: -0.25 - impact * 0.4,
+      rotationY: Math.PI / 2 - 0.25 - impact * 0.4,
       bones: {
         spine: rotation(0.36 * impact, 0.22 * impact, 0.28 * impact),
         chest: rotation(0.48 * impact, 0.35 * impact, 0.32 * impact),
@@ -271,7 +272,8 @@ const guardianPose = (kind: MotionKind, p: number, time: number): Pose => {
     x: 1.28,
     y: 0,
     z: 0,
-    rotationY: Math.PI,
+    // 守将位于画面右侧，始终侧身朝向左侧的剑客。
+    rotationY: -Math.PI / 2,
     weaponVisible: true,
     jaw: 0,
     bones: {
@@ -315,7 +317,7 @@ const guardianPose = (kind: MotionKind, p: number, time: number): Pose => {
     const contact = pulse(p, 0.68, 0.22);
     return mergePose(base, {
       x: 1.28 - brace * 0.23 + contact * 0.04,
-      rotationY: Math.PI + contact * 0.08,
+      rotationY: -Math.PI / 2 + contact * 0.08,
       bones: {
         spine: rotation(-0.18 * brace, 0.12 * brace, 0.08 * contact),
         chest: rotation(-0.24 * brace, 0.18 * brace, 0.12 * contact),

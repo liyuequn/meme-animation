@@ -13,6 +13,7 @@ export type MotionKind =
 export interface MotionConstraint {
   rootMotion?: boolean;
   footLock?: boolean;
+  facing?: "travel-direction" | "target";
   gazeTarget?: "guardian" | "gate" | "swordsman";
   handProp?: "sword" | "spear";
   contactTarget?: "sword-spear";
@@ -55,7 +56,7 @@ const templates: BeatTemplate[] = [
     duration: 2.4,
     intensity: 0.55,
     matcher: /走入|走进|进场|靠近|上前|逼近/,
-    constraints: { rootMotion: true, footLock: true, gazeTarget: "gate" }
+    constraints: { rootMotion: true, footLock: true, facing: "travel-direction", gazeTarget: "gate" }
   },
   {
     kind: "scan",
@@ -63,7 +64,7 @@ const templates: BeatTemplate[] = [
     duration: 1.45,
     intensity: 0.42,
     matcher: /环顾|观察|扫视|回头|张望|看向/,
-    constraints: { footLock: true, gazeTarget: "gate" }
+    constraints: { footLock: true, facing: "target", gazeTarget: "gate" }
   },
   {
     kind: "speak",
@@ -71,7 +72,7 @@ const templates: BeatTemplate[] = [
     duration: 1.8,
     intensity: 0.38,
     matcher: /说话|开口|说道|喊|质问|低声|对白/,
-    constraints: { footLock: true, gazeTarget: "guardian" }
+    constraints: { footLock: true, facing: "target", gazeTarget: "guardian" }
   },
   {
     kind: "draw",
@@ -79,7 +80,7 @@ const templates: BeatTemplate[] = [
     duration: 1.55,
     intensity: 0.68,
     matcher: /拔刀|拔剑|抽刀|抽剑|亮刀/,
-    constraints: { footLock: true, gazeTarget: "guardian", handProp: "sword" }
+    constraints: { footLock: true, facing: "target", gazeTarget: "guardian", handProp: "sword" }
   },
   {
     kind: "dodge",
@@ -87,7 +88,7 @@ const templates: BeatTemplate[] = [
     duration: 1.25,
     intensity: 0.78,
     matcher: /闪避|躲开|侧身|转身|后撤/,
-    constraints: { rootMotion: true, footLock: true, gazeTarget: "guardian", handProp: "sword" }
+    constraints: { rootMotion: true, footLock: true, facing: "target", gazeTarget: "guardian", handProp: "sword" }
   },
   {
     kind: "clash",
@@ -95,7 +96,7 @@ const templates: BeatTemplate[] = [
     duration: 1.65,
     intensity: 0.94,
     matcher: /格挡|交锋|碰撞|相接|前冲|攻击|挥砍|劈砍/,
-    constraints: { rootMotion: true, footLock: true, gazeTarget: "guardian", handProp: "sword", contactTarget: "sword-spear" }
+    constraints: { rootMotion: true, footLock: true, facing: "target", gazeTarget: "guardian", handProp: "sword", contactTarget: "sword-spear" }
   },
   {
     kind: "recoil",
@@ -103,7 +104,7 @@ const templates: BeatTemplate[] = [
     duration: 1.5,
     intensity: 0.82,
     matcher: /受击|踉跄|失去平衡|击退|后退|负伤/,
-    constraints: { rootMotion: true, footLock: true, gazeTarget: "guardian", handProp: "sword" }
+    constraints: { rootMotion: true, footLock: true, facing: "target", gazeTarget: "guardian", handProp: "sword" }
   },
   {
     kind: "recover",
@@ -111,7 +112,7 @@ const templates: BeatTemplate[] = [
     duration: 1.8,
     intensity: 0.5,
     matcher: /恢复|站稳|架势|戒备|稳住/,
-    constraints: { footLock: true, gazeTarget: "guardian", handProp: "sword" }
+    constraints: { footLock: true, facing: "target", gazeTarget: "guardian", handProp: "sword" }
   }
 ];
 

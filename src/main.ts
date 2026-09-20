@@ -151,6 +151,7 @@ const setConstraintChips = (beat: MotionBeat) => {
   const chips: string[] = [];
   if (beat.constraints.rootMotion) chips.push("ROOT MOTION");
   if (beat.constraints.footLock) chips.push("FOOT LOCK");
+  if (beat.constraints.facing) chips.push(beat.constraints.facing === "travel-direction" ? "FACE VELOCITY" : "FACE TARGET");
   if (beat.constraints.handProp) chips.push("HAND IK");
   if (beat.constraints.contactTarget) chips.push("CONTACT SYNC");
   if (beat.constraints.gazeTarget) chips.push("GAZE");
