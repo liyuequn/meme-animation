@@ -22,6 +22,8 @@ def clear_scene():
         for item in list(data):
             if item.users == 0:
                 data.remove(item)
+    for action in list(bpy.data.actions):
+        bpy.data.actions.remove(action)
 
 
 def material(name, color, roughness=0.65, metallic=0.0):
@@ -93,6 +95,63 @@ def look_at(obj, point):
     obj.rotation_euler = (Vector(point) - obj.location).to_track_quat("-Z", "Y").to_euler()
 
 
+def build_standard_rig():
+    bpy.ops.object.armature_add(enter_editmode=True, location=(0, 0, 0))
+    rig = bpy.context.object
+    rig.name = "WuxiaStandardRig"
+    armature = rig.data
+    armature.name = "WuxiaStandardRig"
+    armature.edit_bones.remove(armature.edit_bones[0])
+
+    definitions = {
+        "root": ((0, 0, 0.05), (0, 0, 0.30), None),
+        "pelvis": ((0, 0, 0.95), (0, 0, 1.28), "root"),
+        "spine_01": ((0, 0, 1.28), (0, 0, 1.82), "pelvis"),
+        "spine_02": ((0, 0, 1.82), (0, 0, 2.35), "spine_01"),
+        "spine_03": ((0, 0, 2.35), (0, 0, 2.82), "spine_02"),
+        "neck_01": ((0, 0, 2.82), (0, 0, 3.05), "spine_03"),
+        "Head": ((0, 0, 3.05), (0, 0, 3.72), "neck_01"),
+        "clavicle_l": ((0, 0, 2.67), (-0.48, 0, 2.64), "spine_03"),
+        "upperarm_l": ((-0.48, 0, 2.64), (-0.98, -0.03, 2.10), "clavicle_l"),
+        "lowerarm_l": ((-0.98, -0.03, 2.10), (-1.22, -0.12, 1.62), "upperarm_l"),
+        "hand_l": ((-1.22, -0.12, 1.62), (-1.35, -0.14, 1.42), "lowerarm_l"),
+        "clavicle_r": ((0, 0, 2.67), (0.48, 0, 2.64), "spine_03"),
+        "upperarm_r": ((0.48, 0, 2.64), (0.98, -0.03, 2.10), "clavicle_r"),
+        "lowerarm_r": ((0.98, -0.03, 2.10), (1.22, -0.12, 1.62), "upperarm_r"),
+        "hand_r": ((1.22, -0.12, 1.62), (1.35, -0.14, 1.42), "lowerarm_r"),
+        "thigh_l": ((-0.25, 0, 1.02), (-0.30, 0, 0.58), "pelvis"),
+        "calf_l": ((-0.30, 0, 0.58), (-0.32, 0, 0.16), "thigh_l"),
+        "foot_l": ((-0.32, 0, 0.16), (-0.32, -0.42, 0.10), "calf_l"),
+        "thigh_r": ((0.25, 0, 1.02), (0.30, 0, 0.58), "pelvis"),
+        "calf_r": ((0.30, 0, 0.58), (0.32, 0, 0.16), "thigh_r"),
+        "foot_r": ((0.32, 0, 0.16), (0.32, -0.42, 0.10), "calf_r"),
+    }
+    bones = {}
+    for name, (head, tail, parent) in definitions.items():
+        bone = armature.edit_bones.new(name)
+        bone.head = head
+        bone.tail = tail
+        if parent:
+            bone.parent = bones[parent]
+        bones[name] = bone
+    bpy.ops.object.mode_set(mode="OBJECT")
+    rig.show_in_front = True
+    rig.display_type = "WIRE"
+    return rig
+
+
+def bone_parent(rig, object_names, bone_name):
+    for name in object_names:
+        obj = bpy.data.objects.get(name)
+        if not obj:
+            continue
+        world = obj.matrix_world.copy()
+        obj.parent = rig
+        obj.parent_type = "BONE"
+        obj.parent_bone = bone_name
+        obj.matrix_world = world
+
+
 clear_scene()
 
 skin = material("skin warm", (0.72, 0.48, 0.34), 0.74)
@@ -157,12 +216,12 @@ created.append(cube("FrontPanel", (0, -0.60, 0.93), (0.36, 0.055, 0.72), robe_li
 created.append(cube("Shoe.L", (-0.32, -0.10, 0.12), (0.24, 0.42, 0.12), ink, 0.09))
 created.append(cube("Shoe.R", (0.32, -0.10, 0.12), (0.24, 0.42, 0.12), ink, 0.09))
 
-# Jian and scabbard at the waist.
+# Jian scabbard at the waist and blade in the right hand.
 created.append(cylinder_between("Scabbard", (0.62, 0.02, 1.67), (1.34, 0.07, 0.36), 0.075, ink, 24))
 created.append(cylinder_between("ScabbardGold", (0.63, 0.02, 1.68), (0.76, 0.03, 1.45), 0.088, gold, 24))
-created.append(cylinder_between("JianBlade", (-0.72, -0.06, 1.68), (-1.48, -0.13, 0.42), 0.035, steel, 12))
-created.append(cylinder_between("JianGrip", (-0.58, -0.05, 1.91), (-0.75, -0.06, 1.64), 0.06, ink, 20))
-created.append(cube("JianGuard", (-0.69, -0.06, 1.69), (0.20, 0.055, 0.045), gold, 0.025, (0, 0, math.radians(-28))))
+created.append(cylinder_between("JianBlade", (1.36, -0.14, 1.40), (1.82, -0.17, 0.15), 0.035, steel, 12))
+created.append(cylinder_between("JianGrip", (1.25, -0.13, 1.68), (1.38, -0.14, 1.38), 0.06, ink, 20))
+created.append(cube("JianGuard", (1.36, -0.14, 1.42), (0.20, 0.055, 0.045), gold, 0.025, (0, 0, math.radians(20))))
 
 # Hair ribbon and back locks.
 created.append(cube("Hairpin", (0, 0.04, 3.94), (0.46, 0.035, 0.035), gold, 0.025))
@@ -173,6 +232,23 @@ for side in (-1, 1):
         0.12,
         ink,
     )
+
+rig = build_standard_rig()
+bone_parent(rig, ["LowerRobe", "FrontPanel", "Belt", "BeltTrim", "BeltClasp", "Scabbard", "ScabbardGold"], "pelvis")
+bone_parent(rig, ["UpperRobe", "Lapel.L", "Lapel.R"], "spine_02")
+bone_parent(rig, ["Neck"], "neck_01")
+bone_parent(
+    rig,
+    ["Head", "Nose", "HairCap", "TopKnot", "HairCrown", "Eye.-1", "Eye.1", "Pupil.-1", "Pupil.1", "Brow.-1", "Brow.1", "Mouth", "Hairpin", "TempleLock.-1", "TempleLock.1", "BackHair.-1", "BackHair.1"],
+    "Head",
+)
+for side, suffix in [(-1, "l"), (1, "r")]:
+    bone_parent(rig, [f"UpperSleeve.{side}"], f"upperarm_{suffix}")
+    bone_parent(rig, [f"LowerSleeve.{side}", f"LiningCuff.{side}"], f"lowerarm_{suffix}")
+    bone_parent(rig, [f"Hand.{side}"], f"hand_{suffix}")
+bone_parent(rig, ["Shoe.L"], "foot_l")
+bone_parent(rig, ["Shoe.R"], "foot_r")
+bone_parent(rig, ["JianBlade", "JianGrip", "JianGuard"], "hand_r")
 
 # Floor, backdrop, lights, and portrait camera.
 floor_mat = material("floor", (0.018, 0.024, 0.031), 0.82)

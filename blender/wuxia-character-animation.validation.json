@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "source": "assets/third_party/quaternius-ual/UAL2_Standard.glb",
+  "sourceAction": "Sword_Regular_Combo",
+  "targetRig": "WuxiaStandardRig",
+  "mappedBones": 21,
+  "frameStart": 0,
+  "frameEnd": 90,
+  "frameCount": 91,
+  "fps": 30,
+  "evidenceVideo": "docs/wuxia-character-sword-combo.mp4",
+  "evidenceContactSheet": "docs/wuxia-character-motion-contact-sheet.png",
+  "result": "articulated-motion-pass",
+  "knownLimits": [
+    "The character is rigid-part rigged, not deform-skinned.",
+    "The lower robe has no cloth or auxiliary bones.",
+    "The face has no expression or lip-sync rig."
+  ]
+}
